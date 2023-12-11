@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Emprunts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="emprunts.css">
+</head>
+<body>
+    <h1>Gestion des Emprunts</h1>
+
+    <!-- Formulaire de recherche d'adhérent -->
+    <form id="rechercheAdherentForm">
+       
+        <label for="searchAdherent" >Rechercher Adhérent  <i class="fas fa-info-circle" onclick="afficherInfo()"></i> :</label>
+        <input type="text" id="searchAdherent" name="searchAdherent" required>
+       <!-- <input type="text" id="searchPrenom" name="searchAdherent" required>-->
+        <button type="button" onclick="rechercherAdherent()">Rechercher</button>
+    </form>
+
+    <!-- Résultats de la recherche -->
+    <div id="resultatsRecherche"></div>
+
+    <!-- Formulaire de création de prêt -->
+    <form id="empruntForm">
+        <label for="numeroAdherent">Identifiant Adhérent:</label>
+        <input type="text" id="numeroAdherent" name="numeroAdherent" required>
+        <br>
+        <label for="codeExemplaire">Code Exemplaire:</label>
+        <input type="text" id="codeExemplaire" name="codeExemplaire" required>
+        <br><br>
+        <button type="button" onclick="enregistrerEmprunt()">Enregistrer Emprunt</button>
+    </form><br>
+
+    <!-- Affichage des prêts éventuels -->
+    <div id="listePrets"></div>
+
+    <script src="class_Emprunts.js"></script>
+    <script src="gestion_emprunts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</body>
+</html>
