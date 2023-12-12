@@ -1,0 +1,20 @@
+img .miniImageBD {
+    width: 100px;
+    height: 120px;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.displayList {
+    display: row;
+}
+
+table {
+    border: 1px solid black;
+}
