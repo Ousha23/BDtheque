@@ -78,40 +78,26 @@
 		// Récupérer les infos de la BDD
 		var idAlbumEnCours = BDalt.split("-")[1];
 		var albumEnCours = albums.get(idAlbumEnCours)
-
 		var lAuteur = auteurs.get(albumEnCours.idAuteur);
 		var laSerie = series.get(albumEnCours.idSerie);
 		var nbExempEnCours = nbrExmplairesAlbum(idAlbumEnCours);
-		
-		/**
-		 * retourne le nombre d'exemplaire pour l'album selectionné
-		 * @param {number} idAlbumEnCours 
-		 * @returns 
-		 */
-		function nbrExmplairesAlbum(idAlbumEnCours) {
-			let nombreExemplaires = 0;
-			exemplaires.forEach((exemplaire) => {
-				if (exemplaire.idAlbum === idAlbumEnCours) {
-					nombreExemplaires++;
-					console.log(nombreExemplaires);
-				}
-			});
-			console.log(idAlbumEnCours);
-			
-			return nombreExemplaires;
-		}
-
 		var titreBDAvantAdaptation = serie.nom + "-" + album.numero + "-" + album.titre;
-        var titreBD = adaptertitreBD(titreBDAvantAdaptation) 
+        var titreBD = adaptertitreBD(titreBDAvantAdaptation);
+		//var tDispo = ExplDispo(idAlbumEnCours);
+		//console.log(tDispo);
 
         // afficher la grande image 
 		var grandeImgBD = document.createElement("img");
 		grandeImgBD.setAttribute("src",showGrandeImage(title));
 		grandeImgBD.setAttribute("alt",titreBD);
-		grandeImgBD.setAttribute("id", "currentBD")
+		grandeImgBD.setAttribute("id", "currentBD");
+		grandeImgBD.setAttribute("class", "grdImgBD")
+		
 
 		var descriptBD = document.getElementById("descriptBD")
-		descriptBD.appendChild(grandeImgBD);
+		var divGrdImg = document.getElementById("grdImgBD")
+		descriptBD.appendChild(divGrdImg);
+		divGrdImg.appendChild(grandeImgBD);
 		descriptBD.classList.remove("hide");
 		miniBD.classList.add("hide");
 
@@ -155,8 +141,14 @@
 		tDetailBD.appendChild(row);
 		
 		document.getElementById("tBD").appendChild(tDetailBD);
+		
+		if (nbExempEnCours !== 0){
+			var btnEmprunt = creerBtns("Emprunter","empruntBtnID");
+			btnEmprunt.addEventListener("click", function() {redirectEmprunt(idAlbumEnCours);});
+		}
 
-		createBtn();
+		var btnRetour = creerBtns("Retour","previousBtn");
+		btnRetour.addEventListener("click", function()  {previous ();});
 	}
 
 	/**
@@ -180,15 +172,26 @@
 	/**
 	 * Crée le boutton retour 
 	 */
-	function createBtn() {
+	function creerBtns(txt,idBtn) {
+		// boutton retour
+		var descriptBD = document.getElementById("descriptBD")
+		var divbtn = document.getElementById("btnsDiv")
 		var btn = document.createElement("button");
-		var t = document.createTextNode("Retour");
-		btn.appendChild(t);
-		btn.setAttribute("id", "previousBtn");
-		btn.setAttribute("class", "btnBD")
+		var t = document.createTextNode(txt);
+		
+		btn.setAttribute("id", idBtn);
+		btn.setAttribute("class", "btnBD m-1");
 
-		document.body.appendChild(btn);
-		btn.addEventListener("click", function()  {previous ();});
+		descriptBD.appendChild(divbtn);
+		divbtn.appendChild(btn);
+		btn.appendChild(t);
+
+		descriptBD.classList.remove("hide");
+		miniBD.classList.add("hide");
+
+		return btn
+	
+		
 	}
 
 	/**
@@ -198,9 +201,11 @@
 		var btnPrev = document.getElementById("previousBtn");
 		var imgPrev = document.getElementById("currentBD");
 		var rowPrev = document.getElementById("row");
+		var btnEmpPrev = document.getElementById("empruntBtnID");
 		btnPrev.remove();
 		imgPrev.remove();
 		rowPrev.remove();
+		btnEmpPrev.remove();
 
 	}
 	/**
@@ -219,4 +224,37 @@
 		var nomDbEnSortie = titreBDEnEntree.replace(/'|!|\?|\.|"|:|\$/g, "").replace(/à/g,"…").replace(/ê/g,'ˆ').replace(/è/g,"Š").replace(/ï/g,"‹").replace(/ô/g,"“").replace(/û/g,"–").replace(/â/g,"ƒ").replace(/(ƒg)/g,"ト").replace(/é/g,'‚').replace(/î/g,"Œ").replace(/(Šm)/g,"確").replace(/ü/g,"�").replace(/ù/g,"—").replace(/ç/g,"").replace(/(ƒn)/g,"ハ");
 		return nomDbEnSortie
 
+	}
+
+	/**
+		 * retourne le nombre d'exemplaire pour l'album selectionné
+		 * @param {number} idAlbumEnCours 
+		 * @returns 
+		 */
+	function nbrExmplairesAlbum(idAlbum) {
+		let nombreExemplaires = 0;
+		exemplaires.forEach((exemplaire) => {
+			if (exemplaire.idAlbum === idAlbum && exemplaire.disponible) {
+				nombreExemplaires++;
+			}
+		});	
+		return nombreExemplaires;
+	}
+
+	// function ExplDispo(idAlbum){
+	// 	let tExplDipsp = [];
+	// 	exemplaires.forEach((exemplaire) => {
+	// 		if (exemplaire.idAlbum === idAlbum) {
+	// 			tExplDipsp.push(exemplaire.barreCode,exemplaire.disponible );
+
+	// 		}
+	// 	});	
+	// 	return tExplDipsp;
+	// }
+
+	/**
+	 * Redirection vers la page de l'emprunt avec envoie de l'id en paramêtre
+	 */
+	function redirectEmprunt(idAlbumActuel) {
+		document.location.href="emprunt_BD.html?albumid="+idAlbumActuel;
 	}
