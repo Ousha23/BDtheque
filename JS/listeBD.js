@@ -12,7 +12,7 @@
 	var descriptBD = document.getElementById("descriptBD");
 
 	// insère les images après formatage des données
-	// NB : J'ai rajouté l'idAlbum dans la boucle 
+	// ajout l'idAlbum dans la boucle 
 	albums.forEach((album, idAlbum) => {
 	    serie = series.get(album.idSerie);
 	    auteur = auteurs.get(album.idAuteur);
@@ -27,7 +27,7 @@
         
         newImg.setAttribute("src",showMiniAlbums(nomBD));
 		newImg.setAttribute("alt",nameBDAlt +".jpg");
-		// NB : envoyer l'id album dans l'attribut id
+		
 		newImg.setAttribute("id", "album-"+idAlbum);
 		newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded");
 		
@@ -50,7 +50,7 @@
 		}
     }
 
-	// NB : J'ai rajouté cette fonction pour afficher la grande image 
+	// NB : fonction pour afficher la grande image 
 	/**
 	 * Permet le formatage des données en titre de l'img 
 	 * @param {string} nomFiction 
@@ -72,7 +72,7 @@
 	function showDetailBD (BDalt, title) {
 		BDalt = BDalt.getAttribute("id");
 
-		// NB : Récupérer les infos de la BDD
+		// Récupérer les infos de la BDD
 		var albumEnCours = albums.get(BDalt.split("-")[1])
 		var lAuteur = auteurs.get(albumEnCours.idAuteur);
 		var laSerie = series.get(albumEnCours.idSerie)
@@ -80,7 +80,7 @@
 		var nomBDAvantAdaptation = serie.nom + "-" + album.numero + "-" + album.titre;
         var nomBD = adapterNomBd(nomBDAvantAdaptation) 
 
-        // NB : afficher la grande image 
+        // afficher la grande image 
 		var grandeImgBD = document.createElement("img");
 		grandeImgBD.setAttribute("src",showGrandeImage(title));
 		grandeImgBD.setAttribute("alt",nomBD);
@@ -94,7 +94,7 @@
 		var row = document.createElement("tr")
 		row.setAttribute("id","row")
 
-		// NB : afficher les colonnes du tableau en affichant les info venant de la BDD
+		// afficher les colonnes du tableau en affichant les info venant de la BDD
 		// serie 
 		var cellSerie = document.createElement("td");
 		var cellTextSerie = document.createTextNode(laSerie.nom);
@@ -139,7 +139,6 @@
 		miniImgBD.setAttribute("src",showMiniAlbums(title));
 		miniImgBD.setAttribute("alt",BDalt);
 		miniImgBD.setAttribute("id", "currentBD")
-		// NB : ajouter une class css pour specifier la taille de la petite image 
 		miniImgBD.setAttribute("class", "miniImageBD")
 
 		var descriptBD = document.getElementById("descriptBD")
@@ -182,8 +181,6 @@
 		deleteElmts();
 	}
 
-
-	// NB : j'ai extrait la regex dans une fonction car je l'utilise aussi dans l'affichage du détail album 
 	/**
 	 * funciton qui permet de faire les adaptations sur le nom de la BD pour pouvoir retrouver l'image
 	 */
