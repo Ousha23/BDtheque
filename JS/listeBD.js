@@ -9,6 +9,9 @@
 	var serie = series.get(album.idSerie);
 	var auteur = auteurs.get(album.idAuteur);
 
+	var nbExemp = exemplaires.get(album.idExemplaire);
+
+
 	var descriptBD = document.getElementById("descriptBD");
 
 	// insère les images après formatage des données
@@ -18,14 +21,14 @@
 	    auteur = auteurs.get(album.idAuteur);
 
         var nameBDAlt = serie.nom + "-" + album.numero + "-" + album.titre;
-        var nomBD = adapterNomBd(nameBDAlt) 
+        var titreBD = adaptertitreBD(nameBDAlt) 
 		
 		var newDivCol = document.createElement("div");
         var newImg = document.createElement("img");
 
 		newDivCol.setAttribute("class", "col-6 col-sm-4 col-md-3 col-lg-2");
         
-        newImg.setAttribute("src",showMiniAlbums(nomBD));
+        newImg.setAttribute("src",showMiniAlbums(titreBD));
 		newImg.setAttribute("alt",nameBDAlt +".jpg");
 		
 		newImg.setAttribute("id", "album-"+idAlbum);
@@ -34,7 +37,7 @@
 		newDivCol.appendChild(newImg);
 		miniBD.appendChild(newDivCol);
 
-		newImg.addEventListener("click", function()  {showDetailBD(newImg, nomBD);});
+		newImg.addEventListener("click", function()  {showDetailBD(newImg, titreBD);});
 	});
 
 	/**
@@ -73,17 +76,38 @@
 		BDalt = BDalt.getAttribute("id");
 
 		// Récupérer les infos de la BDD
-		var albumEnCours = albums.get(BDalt.split("-")[1])
+		var idAlbumEnCours = BDalt.split("-")[1];
+		var albumEnCours = albums.get(idAlbumEnCours)
+
 		var lAuteur = auteurs.get(albumEnCours.idAuteur);
-		var laSerie = series.get(albumEnCours.idSerie)
+		var laSerie = series.get(albumEnCours.idSerie);
+		var nbExempEnCours = nbrExmplairesAlbum(idAlbumEnCours);
 		
-		var nomBDAvantAdaptation = serie.nom + "-" + album.numero + "-" + album.titre;
-        var nomBD = adapterNomBd(nomBDAvantAdaptation) 
+		/**
+		 * retourne le nombre d'exemplaire pour l'album selectionné
+		 * @param {number} idAlbumEnCours 
+		 * @returns 
+		 */
+		function nbrExmplairesAlbum(idAlbumEnCours) {
+			let nombreExemplaires = 0;
+			exemplaires.forEach((exemplaire) => {
+				if (exemplaire.idAlbum === idAlbumEnCours) {
+					nombreExemplaires++;
+					console.log(nombreExemplaires);
+				}
+			});
+			console.log(idAlbumEnCours);
+			
+			return nombreExemplaires;
+		}
+
+		var titreBDAvantAdaptation = serie.nom + "-" + album.numero + "-" + album.titre;
+        var titreBD = adaptertitreBD(titreBDAvantAdaptation) 
 
         // afficher la grande image 
 		var grandeImgBD = document.createElement("img");
 		grandeImgBD.setAttribute("src",showGrandeImage(title));
-		grandeImgBD.setAttribute("alt",nomBD);
+		grandeImgBD.setAttribute("alt",titreBD);
 		grandeImgBD.setAttribute("id", "currentBD")
 
 		var descriptBD = document.getElementById("descriptBD")
@@ -122,6 +146,13 @@
 		cellAuteur.appendChild(cellTextAuteur);
 		row.appendChild(cellAuteur);
 		tDetailBD.appendChild(row);
+
+		//nbr Exemplaire
+		var cellExplaire = document.createElement("td");
+		var cellTextExplaire = document.createTextNode(nbExempEnCours);
+		cellExplaire.appendChild(cellTextExplaire);
+		row.appendChild(cellExplaire);
+		tDetailBD.appendChild(row);
 		
 		document.getElementById("tBD").appendChild(tDetailBD);
 
@@ -147,7 +178,7 @@
 	}
 	
 	/**
-	 * Créé le boutton retour 
+	 * Crée le boutton retour 
 	 */
 	function createBtn() {
 		var btn = document.createElement("button");
@@ -182,10 +213,10 @@
 	}
 
 	/**
-	 * funciton qui permet de faire les adaptations sur le nom de la BD pour pouvoir retrouver l'image
+	 * permet de faire les adaptations sur le nom de la BD pour pouvoir retrouver l'image
 	 */
-	function adapterNomBd(nomBdEnEntree){
-		var nomDbEnSortie = nomBdEnEntree.replace(/'|!|\?|\.|"|:|\$/g, "").replace(/à/g,"…").replace(/ê/g,'ˆ').replace(/è/g,"Š").replace(/ï/g,"‹").replace(/ô/g,"“").replace(/û/g,"–").replace(/â/g,"ƒ").replace(/(ƒg)/g,"ト").replace(/é/g,'‚').replace(/î/g,"Œ").replace(/(Šm)/g,"確").replace(/ü/g,"�").replace(/ù/g,"—").replace(/ç/g,"").replace(/(ƒn)/g,"ハ");
+	function adaptertitreBD(titreBDEnEntree){
+		var nomDbEnSortie = titreBDEnEntree.replace(/'|!|\?|\.|"|:|\$/g, "").replace(/à/g,"…").replace(/ê/g,'ˆ').replace(/è/g,"Š").replace(/ï/g,"‹").replace(/ô/g,"“").replace(/û/g,"–").replace(/â/g,"ƒ").replace(/(ƒg)/g,"ト").replace(/é/g,'‚').replace(/î/g,"Œ").replace(/(Šm)/g,"確").replace(/ü/g,"�").replace(/ù/g,"—").replace(/ç/g,"").replace(/(ƒn)/g,"ハ");
 		return nomDbEnSortie
 
 	}
