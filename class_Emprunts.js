@@ -26,11 +26,15 @@ class GestionEmprunts {
             ["A009", { titre: "Titre BD I", disponible: true }],
             ["A010", { titre: "Titre BD J", disponible: true }],
         ]);
-       
+
+        this.loadEmpruntsFromlocalStorage();
+        
+        this.loadStateFromLocalStorage();
+        //localStorage.clear();
     }
 
   
-    ajouterAdherent(id, nom, prenom, email) {
+   /* ajouterAdherent(id, nom, prenom, email) {
         // Créez un nouvel adhérent
         const nouvelAdherent = {
             id,
@@ -42,7 +46,7 @@ class GestionEmprunts {
 
         // Ajoutez le nouvel adhérent à la liste des adhérents
         this.adherents.set(id, nouvelAdherent);
-    }
+    }*/
    
 
     rechercherAdherent(nomEmailId) {
@@ -77,13 +81,15 @@ class GestionEmprunts {
         }
     }
 
-    
-     
-
-  
-
     enregistrerEmprunt(numeroAdherent, codeExemplaire) {
+       
         let adherent = this.rechercherAdherentParId(numeroAdherent);
+
+        if (!adherent) {
+            // Handle the case where the adherent is not found
+            alert("L'adhérent n'est pas connu par notre système.");
+            return;
+        }
 
         if (this.getNombreEmprunts(numeroAdherent) >= this.empruntMax) {
             alert("Cet adhérent a déjà atteint le nombre maximum d'emprunts autorisés.");
@@ -101,52 +107,80 @@ class GestionEmprunts {
             alert("Cette BD n'est pas disponible pour l'emprunt.");
             return;
         }
-
         //calcul date emprunt
+        let dateEmprunt = new Date();
         let dateRetourPrevu = new Date();
         dateRetourPrevu.setDate(dateRetourPrevu.getDate() + this.dureeMaxEmpruntJours);
 
         let emprunt = {
             numeroAdherent,
             codeExemplaire,
-            dateEmprunt: new Date(),
+            dateEmprunt,
             dateRetourPrevu,
         };
 
+         /*//tester retard 
+         const dateActuelle = new Date();
+         const dateEmprunt = new Date(dateActuelle);
+         dateEmprunt.setDate(dateEmprunt.getDate() - 16);
+     
+         let dateRetourPrevu = new Date(dateEmprunt);
+         dateRetourPrevu.setDate(dateRetourPrevu.getDate() + this.dureeMaxEmpruntJours);
+     
+         let emprunt = {
+             numeroAdherent,
+             codeExemplaire,
+             dateEmprunt,
+             dateRetourPrevu,
+         };*/
+ 
+
         adherent.emprunts.push(emprunt);
-        exemplaire.disponible = false;
+        this.bdExemplaires.set(codeExemplaire, { ...exemplaire, disponible: false });
 
-        //tester retard 
-        /*const dateActuelle = new Date();
-        const dateEmprunt = new Date(dateActuelle);
-        dateEmprunt.setDate(dateEmprunt.getDate() - 16);
-    
-        let dateRetourPrevu = new Date(dateEmprunt);
-        dateRetourPrevu.setDate(dateRetourPrevu.getDate() + this.dureeMaxEmpruntJours);
-    
-        let emprunt = {
-            numeroAdherent,
-            codeExemplaire,
-            dateEmprunt,
-            dateRetourPrevu,
-        };*/
-
+       
          // Vérifier le retard
         const retardJours = this.calculerRetard(emprunt);
         if (retardJours > 0) {
-        const payerAmende = confirm(`Cet adhérent a un retard de ${retardJours} jours. Voulez-vous payer une amende de 5 euros ?`);
+            const payerAmende = confirm(`Cet adhérent a un retard de ${retardJours} jours. Voulez-vous payer une amende de 5 euros ?`);
 
-        if (payerAmende) {
-            this.payerAmende(adherent);
-        } else {
-            this.restrictionsEmprunt(adherent);
+            if (payerAmende) {
+                this.payerAmende(adherent);
+            } else {
+                this.restrictionsEmprunt(adherent);
+            }
         }
-    }
 
-        this.sauvegarderEmpruntsLocaux();
+        this.sauvegarderEmpruntsLocaux(adherent);
 
         alert("L'emprunt a été enregistré avec succès. Adhérent: " + emprunt.numeroAdherent + ", Code Exemplaire: " + emprunt.codeExemplaire + ", Titre: " + exemplaire.titre);
+    }
 
+    sauvegarderEmpruntsLocaux(adherent) {
+      
+        // Convertir les emprunts en format JSON
+        var empruntsJSON = JSON.stringify(adherent.emprunts);
+        var empruntsTJSON = JSON.stringify(this.emprunts);
+        // Stocker les emprunts dans le localStorage sous la clé correspondant à l'adhérent
+        localStorage.setItem("adherent_" + adherent.id + "_emprunts", empruntsJSON);
+        localStorage.setItem("emprunts", empruntsTJSON);
+    }  
+
+    loadEmpruntsFromlocalStorage() {
+        // Clear the existing emprunts array
+       // localStorage.clear();
+        this.emprunts = [];
+    
+        this.adherents.forEach((adherent, adherentId) => {
+            var savedEmprunts = localStorage.getItem("adherent_" + adherentId + "_emprunts");
+            adherent.emprunts = savedEmprunts ? JSON.parse(savedEmprunts) : [];
+            if (!Array.isArray(adherent.emprunts)) {
+                adherent.emprunts = [];
+            }
+    
+            // Merge adherent's emprunts with the general emprunts array
+            this.emprunts = this.emprunts.concat(adherent.emprunts);
+        });
     }
 
     calculerRetard(emprunt) {
@@ -204,12 +238,24 @@ class GestionEmprunts {
         });
     }
 
-    sauvegarderEmpruntsLocaux() {
-        // Convertissez les emprunts en format JSON
-        const empruntsJSON = JSON.stringify(this.emprunts);
+    loadStateFromLocalStorage() {
+       
+        const savedState = localStorage.getItem("gestion_emprunts_state");
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            // Restore the state of borrowed books
+            this.emprunts = state.emprunts || [];
+            this.bdExemplaires = new Map(state.bdExemplaires || []);
+        }
+    }
 
-        // Stockez les emprunts dans le localStorage sous la clé "emprunts"
-        localStorage.setItem("emprunts", empruntsJSON);
+    saveStateToLocalStorage() {
+        // Save the state of borrowed books to local storage
+        const state = {
+            emprunts: this.emprunts,
+            bdExemplaires: Array.from(this.bdExemplaires),
+        };
+        localStorage.setItem("gestion_emprunts_state", JSON.stringify(state));
     }
 
 
@@ -217,3 +263,11 @@ class GestionEmprunts {
 
     
 }
+
+const gestionEmprunts = new GestionEmprunts();
+gestionEmprunts.loadStateFromLocalStorage(); // Load the state when the page loads
+
+window.addEventListener("beforeunload", () => {
+    gestionEmprunts.saveStateToLocalStorage(); // Save the state before the page is unloaded
+});
+
