@@ -14,31 +14,55 @@
 
 	var descriptBD = document.getElementById("descriptBD");
 
+	
+
+	function afficheTabBDDynamic(motCle){
 	// insère les images après formatage des données
 	// ajout l'idAlbum dans la boucle 
-	albums.forEach((album, idAlbum) => {
-	    serie = series.get(album.idSerie);
-	    auteur = auteurs.get(album.idAuteur);
+	
+		while (miniBD.firstChild) {
+			miniBD.removeChild(miniBD.firstChild);
+		}
 
-        var nameBDAlt = serie.nom + "-" + album.numero + "-" + album.titre;
-        var titreBD = adaptertitreBD(nameBDAlt) 
+		albums.forEach((album, idAlbum) => {
+			serie = series.get(album.idSerie);
+			auteur = auteurs.get(album.idAuteur);
+			
+			var regleRechMotCle = serie.nom + "-" + album.titre + "-" + auteur.nom;
+			
+			console.log(regleRechMotCle);
+			var nameBDAlt = serie.nom + "-" + album.numero + "-" + album.titre;
+			var titreBD = adaptertitreBD(nameBDAlt);
+			if (regleRechMotCle.toLowerCase().includes(motCle.toLowerCase())) {
+				var newDivCol = document.createElement("div");
+				var newImg = document.createElement("img");
 		
-		var newDivCol = document.createElement("div");
-        var newImg = document.createElement("img");
+				newDivCol.setAttribute("class", "col-6 col-sm-4 col-md-3 col-lg-2");
+				
+				newImg.setAttribute("src",showMiniAlbums(titreBD));
+				newImg.setAttribute("alt",nameBDAlt +".jpg");
+				
+				newImg.setAttribute("id", "album-"+idAlbum);
+				newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded");
+				
+				newDivCol.appendChild(newImg);
+				miniBD.appendChild(newDivCol);
+		
+				newImg.addEventListener("click", function()  {showDetailBD(newImg, titreBD);});
+			}
+		});
+	}
 
-		newDivCol.setAttribute("class", "col-6 col-sm-4 col-md-3 col-lg-2");
-        
-        newImg.setAttribute("src",showMiniAlbums(titreBD));
-		newImg.setAttribute("alt",nameBDAlt +".jpg");
-		
-		newImg.setAttribute("id", "album-"+idAlbum);
-		newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded");
-		
-		newDivCol.appendChild(newImg);
-		miniBD.appendChild(newDivCol);
+	afficheTabBDDynamic("");
 
-		newImg.addEventListener("click", function()  {showDetailBD(newImg, titreBD);});
+	var rechercheMotCle = document.getElementById("rechercheMotCle");
+
+	rechercheMotCle.addEventListener("input", function(e) {
+		var motRecherche = rechercheMotCle.value;
+		afficheTabBDDynamic(motRecherche);
 	});
+	
+
 
 	/**
 	 * Permet le formatage des données en titre de l'img 
@@ -241,20 +265,12 @@
 		return nombreExemplaires;
 	}
 
-	// function ExplDispo(idAlbum){
-	// 	let tExplDipsp = [];
-	// 	exemplaires.forEach((exemplaire) => {
-	// 		if (exemplaire.idAlbum === idAlbum) {
-	// 			tExplDipsp.push(exemplaire.barreCode,exemplaire.disponible );
-
-	// 		}
-	// 	});	
-	// 	return tExplDipsp;
-	// }
-
 	/**
 	 * Redirection vers la page de l'emprunt avec envoie de l'id en paramêtre
 	 */
 	function redirectEmprunt(idAlbumActuel) {
-		document.location.href="emprunt_BD.html?albumid="+idAlbumActuel;
+		document.location.href="emprunt.html?albumid="+idAlbumActuel;
 	}
+
+
+
