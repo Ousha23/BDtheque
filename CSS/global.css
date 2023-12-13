@@ -1,0 +1,19 @@
+button {
+    background-color: #ff6944;
+    border: white;
+    color: white;
+    border-radius: 15px;
+    width: 200px;
+    box-shadow : 5px 5px 10px 0px rgba(0,0,0,0.44)
+}
+
+button:hover {
+    background-color: white;
+    color: #ff6944;
+    border: 1px solid #ff6944;
+    box-shadow : 5px 5px 10px 0px rgba(0,0,0,0.44)
+}
+
+main {
+    margin-top: 5em;
+}

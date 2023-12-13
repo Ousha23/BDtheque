@@ -27,6 +27,7 @@ class GestionEmprunts {
             ["A010", { titre: "Titre BD J", disponible: true }],
         ]);
 
+
        
 
         this.loadEmpruntsFromlocalStorage();
@@ -37,6 +38,7 @@ class GestionEmprunts {
 
   
    /* ajouterAdherent(id, nom, prenom, email) {
+
         // Créez un nouvel adhérent
         const nouvelAdherent = {
             id,
@@ -49,6 +51,7 @@ class GestionEmprunts {
         // Ajoutez le nouvel adhérent à la liste des adhérents
         this.adherents.set(id, nouvelAdherent);
     }*/
+
    
 
     rechercherAdherent(nomEmailId) {
@@ -83,6 +86,7 @@ class GestionEmprunts {
         }
     }
 
+
     enregistrerEmprunt(numeroAdherent, codeExemplaire) {
        
         let adherent = this.rechercherAdherentParId(numeroAdherent);
@@ -92,7 +96,6 @@ class GestionEmprunts {
             alert("L'adhérent n'est pas connu par notre système.");
             return;
         }
-
         if (this.getNombreEmprunts(numeroAdherent) >= this.empruntMax) {
             alert("Cet adhérent a déjà atteint le nombre maximum d'emprunts autorisés.");
             return;
@@ -109,6 +112,7 @@ class GestionEmprunts {
             alert("Cette BD n'est pas disponible pour l'emprunt.");
             return;
         }
+
       //calcul date emprunt
         let dateEmprunt = new Date();
         let dateRetourPrevu = new Date();
@@ -117,6 +121,7 @@ class GestionEmprunts {
         let emprunt = {
             numeroAdherent,
             codeExemplaire,
+
             dateEmprunt,
             dateRetourPrevu,
         };
@@ -213,6 +218,7 @@ class GestionEmprunts {
             // Merge adherent's emprunts with the general emprunts array
             this.emprunts = this.emprunts.concat(adherent.emprunts);
         });
+
     }
 
     calculerRetard(emprunt) {
@@ -270,6 +276,7 @@ class GestionEmprunts {
         });
     }
 
+
     loadStateFromLocalStorage() {
        
         const savedState = localStorage.getItem("gestion_emprunts_state");
@@ -303,4 +310,5 @@ gestionEmprunts.loadStateFromLocalStorage(); // Load the state when the page loa
 window.addEventListener("beforeunload", () => {
     gestionEmprunts.saveStateToLocalStorage(); // Save the state before the page is unloaded
 });
+
 

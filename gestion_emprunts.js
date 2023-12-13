@@ -1,11 +1,15 @@
 
 
+
 function rechercherAdherent() {
     const searchValue = document.getElementById("searchAdherent").value;
+
     const adherent = gestionEmprunts.rechercherAdherent(searchValue);
     afficherResultatsRecherche(adherent);
 }
 
+
+   
 function afficherResultatsRecherche(adherent) {
     let resultatsRecherche = document.getElementById("resultatsRecherche");
 
@@ -21,6 +25,7 @@ function afficherResultatsRecherche(adherent) {
         <p>Email: ${adherent.email}</p>
     `;
 
+
     afficherPrets(adherent.emprunts);
 }
 
@@ -32,39 +37,49 @@ function afficherPrets(emprunts) {
         return;
     }
 
+
     let tableHtml = document.createElement('table');
     tableHtml.className = 'table-bordure';
+
 
     let headerRow = document.createElement('tr');
     let headers = ['Code Exemplaire', 'Titre', 'Date Emprunt', 'Date Retour Prévu'];
 
     headers.forEach(headerText => {
         let headerCell = document.createElement('th');
+
         headerCell.appendChild(document.createTextNode(headerText));
+
         headerRow.appendChild(headerCell);
     });
 
     tableHtml.appendChild(headerRow);
 
     emprunts.forEach((emprunt) => {
+
         let exemplaire = gestionEmprunts.bdExemplaires.get(emprunt.codeExemplaire);
 
         let row = document.createElement('tr');
         let rowData = [
             emprunt.codeExemplaire,
             exemplaire ? exemplaire.titre : "Titre non disponible",
+
             formatDate(emprunt.dateEmprunt),
             formatDate(emprunt.dateRetourPrevu)
+
         ];
 
         rowData.forEach(cellData => {
             let cell = document.createElement('td');
+
             cell.appendChild(document.createTextNode(cellData));
+
             row.appendChild(cell);
         });
 
         tableHtml.appendChild(row);
     });
+
 
     tableHtml.style.borderCollapse = 'collapse';
     listePrets.innerHTML = '';
@@ -97,7 +112,5 @@ function formatDate(date) {
 
 
     
- 
 
 
-    
