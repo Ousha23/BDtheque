@@ -18,3 +18,12 @@ img:hover {
 table {
     border: 1px solid black;
 }
+
+.addMarge {
+    margin: 5em;
+}
+
+.grdImgBD {
+    width: 300px;
+    height: 400px;
+}

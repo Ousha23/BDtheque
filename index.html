@@ -14,7 +14,7 @@
 <body>
     
 
-    <header>
+    <header class="fixed-top">
         <div id="alert">
             <div class="col-12 alert alert-danger d-block d-sm-none text-center" role="alert">Screen X-Small</div>
             <div class="col-sm-12 alert alert-info d-none d-sm-block d-md-none text-center" role="alert">Screen Small</div>
@@ -31,24 +31,30 @@
             </div>
         </section>
         
-        <section id="descriptBD" class="hide">
-            <table id="tBD">
-                <thead>
+        <section id="descriptBD" class="hide row addMarge text-center">
+            
+            <table id="tBD" class="table table-hover col-12">
+                <thead class="thead">
                     <tr>
                         <th scope="col" class="col-2">Série</th>
                         <th scope="col" class="col-2">Album N°</th>
                         <th scope="col" class="col-2">Titre</th>
-                        <!-- NB : J'ai ajouté colonne-->
                         <th scope="col" class="col-2">Auteur</th>
+                        <th scope="col" class="col-2">Exemplaires Diponibles</th>
                     </tr>
                 </thead>
                 <tbody id="tDetailBD">
 
                 </tbody>
             </table>
+            <div id="grdImgBD" class="col-12 col-md-7">
+            </div>
+            <div id="btnsDiv" class="col-12 col-md-3 m-2">
+
+            </div>
         </section>
     </main>
-
+    <script src="ressources/data/exemplaires.js"></script>
     <script src="ressources/data/auteurs.js"></script>
     <script src="ressources/data/series.js"></script>
     <script src="ressources/data/albums.js"></script>
