@@ -22,8 +22,24 @@
         </div>
     </header>
     <main>
-        
-        <section class="col-12 text-center">
+        <section class="secFormRecherche">
+            <div class="divFormRecherche">
+                <form action="" class="row formRecherche" id="formRecherche">
+                    <div class="col-12 col-md-8">
+                        <input type="text" placeholder="Série" class="h-75">
+                        <input type="text" placeholder="Auteur" class="h-75" >
+                        <input type="text" placeholder="Titre" class="h-75" id="idInputTitre">
+                        <button class=" btnRecherche">Rechercher</button>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="rechercheMotCle">Recherche par mot clé</label>
+                        <input type="text" id="rechercheMotCle" class="h-75">
+                    </div>
+            </form>
+            </div>
+            
+        </section>
+        <section class="col-12 text-center mt-2">
             <div id="listeBD" class="row">    
             </div>
         </section>

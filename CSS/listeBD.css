@@ -27,3 +27,22 @@ table {
     width: 300px;
     height: 400px;
 }
+
+.btnRecherche {
+    width: 150px;
+    height: 23px;
+    margin-top: 4px;
+}
+
+#formRecherche > div> div> input {
+    width: 100px;
+}
+
+/* .secFormRecherche {
+    border: 2px solid red;
+    margin-top: 10px;
+}
+
+.divFormRecherche {
+    /* background-color: blue; */
+/* } */
