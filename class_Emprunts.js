@@ -27,6 +27,8 @@ class GestionEmprunts {
             ["A010", { titre: "Titre BD J", disponible: true }],
         ]);
 
+       
+
         this.loadEmpruntsFromlocalStorage();
         
         this.loadStateFromLocalStorage();
@@ -107,7 +109,7 @@ class GestionEmprunts {
             alert("Cette BD n'est pas disponible pour l'emprunt.");
             return;
         }
-        //calcul date emprunt
+      //calcul date emprunt
         let dateEmprunt = new Date();
         let dateRetourPrevu = new Date();
         dateRetourPrevu.setDate(dateRetourPrevu.getDate() + this.dureeMaxEmpruntJours);
@@ -119,7 +121,7 @@ class GestionEmprunts {
             dateRetourPrevu,
         };
 
-         /*//tester retard 
+        /*//tester retard 
          const dateActuelle = new Date();
          const dateEmprunt = new Date(dateActuelle);
          dateEmprunt.setDate(dateEmprunt.getDate() - 16);
@@ -134,12 +136,14 @@ class GestionEmprunts {
              dateRetourPrevu,
          };*/
  
+         exemplaire.overdue = this.isBookOverdue(emprunt);
+
 
         adherent.emprunts.push(emprunt);
         this.bdExemplaires.set(codeExemplaire, { ...exemplaire, disponible: false });
 
        
-         // Vérifier le retard
+        /* // Vérifier le retard
         const retardJours = this.calculerRetard(emprunt);
         if (retardJours > 0) {
             const payerAmende = confirm(`Cet adhérent a un retard de ${retardJours} jours. Voulez-vous payer une amende de 5 euros ?`);
@@ -149,11 +153,39 @@ class GestionEmprunts {
             } else {
                 this.restrictionsEmprunt(adherent);
             }
-        }
+        }*/
+
+      
 
         this.sauvegarderEmpruntsLocaux(adherent);
 
         alert("L'emprunt a été enregistré avec succès. Adhérent: " + emprunt.numeroAdherent + ", Code Exemplaire: " + emprunt.codeExemplaire + ", Titre: " + exemplaire.titre);
+        this.verifierRetard(exemplaire);
+      
+        
+    }
+
+    
+
+    isBookOverdue(emprunt) {
+        const dateRetourEffectif = new Date();
+        const retardMillis = dateRetourEffectif - emprunt.dateRetourPrevu;
+        const retardJours = Math.floor(retardMillis / (24 * 60 * 60 * 1000));
+        return Math.max(0, retardJours) > 0;
+    }
+    
+    verifierRetard(exemplaire) {
+        if (exemplaire.overdue) {
+            const payerAmende = confirm("Cette BD a un retard. Voulez-vous payer une amende de 5 euros ?");
+    
+            if (payerAmende) {
+                // Perform actions for paying the fine
+                alert("Amende payée avec succès. L'adhérent peut emprunter à nouveau.");
+            } else {
+                // Perform actions for not paying the fine
+                alert("L'adhérent a des restrictions d'emprunt en raison du retard. Veuillez contacter le service client.");
+            }
+        }
     }
 
     sauvegarderEmpruntsLocaux(adherent) {
@@ -168,7 +200,7 @@ class GestionEmprunts {
 
     loadEmpruntsFromlocalStorage() {
         // Clear the existing emprunts array
-       // localStorage.clear();
+       //localStorage.clear();
         this.emprunts = [];
     
         this.adherents.forEach((adherent, adherentId) => {
@@ -258,11 +290,12 @@ class GestionEmprunts {
         localStorage.setItem("gestion_emprunts_state", JSON.stringify(state));
     }
 
-
-    
-
-    
 }
+
+    
+
+    
+
 
 const gestionEmprunts = new GestionEmprunts();
 gestionEmprunts.loadStateFromLocalStorage(); // Load the state when the page loads
