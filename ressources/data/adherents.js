@@ -1,0 +1,2 @@
+var adherents = new Map ();
+    adherents.set("1", {codeAdherent: "001", nom : "balibo", prenom : "jean",  email:"jean.balibo@email.fr",login :"adherent001", pass: "employee001", emprunts: [], retour: []});
