@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/normalize.css">
+    <link rel="stylesheet" href="./CSS/global.css">
+    <link rel="stylesheet" href="./CSS/consultBD.css">
+    <title>Accueil</title>
+</head>
+<body>
+    
+    <header class="sticky-top" id="headerGlobal">
+        <div>
+            <!-- <div class="col-12 alert alert-danger d-block d-sm-none text-center" role="alert">Screen X-Small</div>
+            <div class="col-sm-12 alert alert-info d-none d-sm-block d-md-none text-center" role="alert">Screen Small</div>
+            <div class="col-md-12 alert alert-success d-none d-md-block d-lg-none text-center" role="alert">Screen Medium</div>
+            <div class="col-lg-12 alert alert-warning d-none d-lg-block d-xl-none text-center" role="alert">Screen Large</div>
+            <div class="col-xl-12 alert alert-dark d-none d-xl-block d-xxl-none text-center" role="alert">Screen X-Large</div>
+            <div class="col-xxl-12 alert alert-secondary d-none d-xxl-block text-center" role="alert">Screen XX-Large</div> -->
+        </div>
+        <nav>
+            <div class="menuFixe justify-content-between row">
+                <a class="navbar-brand col-4" href="consultBD.html">
+                    <img class="col-8 col-md-6 col-lg-5" src="ressources/img/logo.png" alt="logo BDthèque">
+                </a>
+                <div class="form-inline col-4 col-sm-3 col-md-2 mt-2 connexionLink">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                            <a id="connexionLink">connexion</a>
+                            <div class="list-grou positionBurger hide" id="menuCompte">
+                                <a href="emprunt.html" class="list-group-item">Mon Compte</a>
+                                <a href="emprunt.html" class="list-group-item">Deconnexion</a>
+                            </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="menuDynamique row text-center" id="menuDynamique">
+            
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="secFormRecherche">
+            <div class="divFormRecherche">
+                <div class="row formRecherche" id="formRecherche">
+                    <div class="col-12 col-md-8">
+                        <input type="text" placeholder="Série" class="h-75 col-2" id="idInputSerie">
+                        <input type="text" placeholder="Auteur" class="h-75 col-2" id="idInputAuteur">
+                        <input type="text" placeholder="Titre" class="h-75 col-2" id="idInputTitre">
+                        <button class="btnRecherche col-3" id="btnRecherche">Rechercher</button>
+                    </div>
+                    <div class="col-12 col-md-4">
+                            <label for="rechercheMotCle" class="col-6">Recherche par mot clé</label>
+                            <input type="text" id="rechercheMotCle" class="h-75 col-4">
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <section class="col-12 text-center">
+            <div id="listeBD" class="row p-4 m-4 mb-5">    
+            </div>
+        </section>
+        
+        <section id="descriptBD" class="hide row addMarge text-center">
+            
+            <table id="tBD" class="table table-hover col-12">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col" class="col-2">Série</th>
+                        <th scope="col" class="col-2">Album N°</th>
+                        <th scope="col" class="col-2">Titre</th>
+                        <th scope="col" class="col-2">Auteur</th>
+                        <th scope="col" class="col-2">Exemplaires Disponibles</th>
+                    </tr>
+                </thead>
+                <tbody id="tDetailBD">
+
+                </tbody>
+            </table>
+            <div id="grdImgBD" class="col-12 col-md-7">
+            </div>
+            <div id="btnsDiv" class="col-12 col-md-3 m-2">
+
+            </div>
+        </section>
+    </main>
+    <footer id="footer" class="pt-1">
+        <p class="text-center ">&copy; Copyright 2023, Bouchra - Leila - Jean-Eudes</p>
+    </footer>
+    <script src="./ressources/data/employes.js"></script>
+    <script src="./ressources/data/adherents.js"></script>
+    <script src="./JS/menu.js"></script>
+    <script src="./ressources/data/exemplaires.js"></script>
+    <script src="./ressources/data/auteurs.js"></script>
+    <script src="./ressources/data/series.js"></script>
+    <script src="./ressources/data/albums.js"></script>
+    <script src="./JS/consultBD.js"></script>
+</body>
+</html>

@@ -1,39 +1,41 @@
 
-	const SRC_IMG = "/ressources/"; // emplacement des images de l'appli
+	const SRC_IMG = "./ressources/"; // emplacement des images de l'appli
 	const SRC_ALBUM_MINI = "albumsMini/"; // emplacement des images des albums en petit
 	const SRC_ALBUM = "albums/"
 	const SRC_DEFAULT = SRC_IMG + "noComicsMini.jpeg";
-	var miniBD = document.getElementById("listeBD")
+	var miniBD = document.getElementById("listeBD");
+	var barreRecherche = document.getElementById("formRecherche");
 
 	var album = albums.get("6");
 	var serie = series.get(album.idSerie);
 	var auteur = auteurs.get(album.idAuteur);
 
-	var nbExemp = exemplaires.get(album.idExemplaire);
-
-
 	var descriptBD = document.getElementById("descriptBD");
 
-	
-
-	function afficheTabBDDynamic(motCle){
+	function afficheTabBDDynamic(motCle, titreRech, serieRech, auteurRech){
 	// insère les images après formatage des données
 	// ajout l'idAlbum dans la boucle 
 	
 		while (miniBD.firstChild) {
 			miniBD.removeChild(miniBD.firstChild);
 		}
+		let aucunResultat = true;
 
 		albums.forEach((album, idAlbum) => {
 			serie = series.get(album.idSerie);
 			auteur = auteurs.get(album.idAuteur);
 			
+			var serieOk = (serieRech !== null && serie.nom.toLowerCase().includes(serieRech.toLowerCase()));
+			var titreOk = (titreRech !== null && album.titre.toLowerCase().includes(titreRech.toLowerCase()));
+			var auteurOK = (auteurRech !== null && auteur.nom.toLowerCase().includes(auteurRech.toLowerCase()));
 			var regleRechMotCle = serie.nom + "-" + album.titre + "-" + auteur.nom;
-			
-			console.log(regleRechMotCle);
+
 			var nameBDAlt = serie.nom + "-" + album.numero + "-" + album.titre;
 			var titreBD = adaptertitreBD(nameBDAlt);
-			if (regleRechMotCle.toLowerCase().includes(motCle.toLowerCase())) {
+
+			//condition pour l'affichage des resultats
+			if ((motCle !== null && regleRechMotCle.toLowerCase().includes(motCle.toLowerCase()))|| (serieOk && titreOk && auteurOK)) {
+				aucunResultat = false;
 				var newDivCol = document.createElement("div");
 				var newImg = document.createElement("img");
 		
@@ -49,21 +51,38 @@
 				miniBD.appendChild(newDivCol);
 		
 				newImg.addEventListener("click", function()  {showDetailBD(newImg, titreBD);});
-			}
+			} 
 		});
+		if (aucunResultat) {
+			var newP = document.createElement("p");
+
+			newP.innerText = "Aucune BD trouvée, merci de refaire la recherche";
+			miniBD.appendChild(newP);
+		}
 	}
 
-	afficheTabBDDynamic("");
+	afficheTabBDDynamic("","","","");
 
+	// ajout d'un listener pour suivre l'écriture au niveau de l input recherche mot clé
 	var rechercheMotCle = document.getElementById("rechercheMotCle");
-
 	rechercheMotCle.addEventListener("input", function(e) {
 		var motRecherche = rechercheMotCle.value;
-		afficheTabBDDynamic(motRecherche);
+		document.getElementById("idInputSerie").value = "";
+		document.getElementById("idInputAuteur").value ="";
+		document.getElementById("idInputTitre").value ="";
+		afficheTabBDDynamic(motRecherche,null,null,null);
+	});
+
+	// ajout d'un listener au click pour effectuer la recherche par input serie / auteur / titre
+	var rechercheBtn = document.getElementById("btnRecherche");
+	rechercheBtn.addEventListener("click", function() {
+		var serieRech = document.getElementById("idInputSerie").value;
+		var auteurRech = document.getElementById("idInputAuteur").value;
+		var titreRech = document.getElementById("idInputTitre").value;
+		document.getElementById("rechercheMotCle").value = "";
+		afficheTabBDDynamic(null, titreRech, serieRech, auteurRech);
 	});
 	
-
-
 	/**
 	 * Permet le formatage des données en titre de l'img 
 	 * @param {string} nomFiction 
@@ -117,13 +136,14 @@
 		grandeImgBD.setAttribute("id", "currentBD");
 		grandeImgBD.setAttribute("class", "grdImgBD")
 		
-
 		var descriptBD = document.getElementById("descriptBD")
 		var divGrdImg = document.getElementById("grdImgBD")
 		descriptBD.appendChild(divGrdImg);
 		divGrdImg.appendChild(grandeImgBD);
 		descriptBD.classList.remove("hide");
 		miniBD.classList.add("hide");
+		barreRecherche.classList.add("hide");
+
 
 		var row = document.createElement("tr")
 		row.setAttribute("id","row")
@@ -238,6 +258,7 @@
 	function previous() {
 		miniBD.classList.remove("hide");
 		descriptBD.classList.add("hide");
+		barreRecherche.classList.remove("hide");
 		deleteElmts();
 	}
 
