@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Gestion des Emprunts</title>
+    <title>Gestion des Retours</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="emprunts.css">
@@ -70,7 +70,7 @@
             <!-- Résultats de la recherche -->
             <div id="resultatsRecherche"></div><br><br>
 
-            <p id="titreEnregistrer">Enregistrer Prêt :</p><br><br>
+            <p id="titreEnregistrer">Enregistrer Retour :</p><br><br>
 
             <!-- Formulaire de création de prêt -->
             <form id="empruntForm">
@@ -85,8 +85,8 @@
                 </div>
                 <br><br>
               
-
-                <button id="bValider" type="button" onclick="enregistrerEmprunt()">Valider</button>
+              
+                <button id="bValider" type="button" onclick="retournerExemplaire()">Valider</button>
                 <button id="bAnnuler" type="button" onclick="annulerFormulaire()">Annuler</button>
                 
                 
@@ -98,13 +98,13 @@
     </main>
 
    
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./exemplaires.js"></script>
     <script src="./albums.js"></script>
     <script src="class_Emprunts.js"></script>
     <script src="body.js"></script>
     <script src="gestion_emprunts.js"></script>
-   
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </body>
 </html>
