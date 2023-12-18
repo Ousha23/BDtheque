@@ -1,0 +1,47 @@
+#connexionform {
+    border: 1px solid #A9A9A9;
+    height: max-content;
+    padding-inline: 25px;
+    padding-top: 25px;
+    margin-bottom: 10em;
+    background-color: #F5F6F8;
+    border-radius: 10px;
+    width: 25em;
+}
+
+#msgBienvenue {
+    margin: 30px;
+    color: #ff6944;
+    font-size: medium;
+}
+
+#labelPassword, #labelLogin {
+    font-size: larger;
+    font-weight: bolder;
+}
+
+#inputPassword::placeholder, #inputLogin::placeholder {
+    font-size: smaller;
+}
+
+#recupPwdLink {
+    color: #ff6944;
+    text-decoration: solid;
+    font-weight: bolder;
+}
+
+#recupPwdMsg {
+    font-size: xx-small;
+}
+
+#msgErrConnexion {
+    color: #ff6944;
+    font-family: 'Roboto';
+    border-radius: 10px;
+    background-color: #e6e6e6; 
+    border: #A9A9A9 solid 1px;  
+}
+
+#divMsgErrConnexion {
+    margin: auto;
+}

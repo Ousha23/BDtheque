@@ -12,6 +12,7 @@
 
 	var descriptBD = document.getElementById("descriptBD");
 
+
 	function afficheTabBDDynamic(motCle, titreRech, serieRech, auteurRech){
 	// insère les images après formatage des données
 	// ajout l'idAlbum dans la boucle 
@@ -102,13 +103,13 @@
 	 * @param {string} nomFiction 
 	 * @returns le contenu src de l'img
 	 */
-		function showGrandeImage (nomFiction){
-			if (!serie.nom || !album.numero || !album.titre) {
-				return SRC_IMG+SRC_DEFAULT+nomFiction+".jpg";	
-			} else {
-				return SRC_IMG+SRC_ALBUM+nomFiction+".jpg";
-			}
+	function showGrandeImage (nomFiction){
+		if (!serie.nom || !album.numero || !album.titre) {
+			return SRC_IMG+SRC_DEFAULT+nomFiction+".jpg";	
+		} else {
+			return SRC_IMG+SRC_ALBUM+nomFiction+".jpg";
 		}
+	}
 	
 	/**
 	 * crée le tableau du détail de la BD
