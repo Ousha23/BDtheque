@@ -3,6 +3,8 @@
 	const SRC_ALBUM_MINI = "albumsMini/"; // emplacement des images des albums en petit
 	const SRC_ALBUM = "albums/"
 	const SRC_DEFAULT = SRC_IMG + "noComicsMini.jpeg";
+	const roleUser = localStorage.getItem("role");
+
 	var miniBD = document.getElementById("listeBD");
 	var barreRecherche = document.getElementById("formRecherche");
 
@@ -187,7 +189,7 @@
 		
 		document.getElementById("tBD").appendChild(tDetailBD);
 		
-		if (nbExempEnCours !== 0){
+		if (nbExempEnCours !== 0  && roleUser === "gestionnaire"){
 			var btnEmprunt = creerBtns("Emprunter","empruntBtnID");
 			btnEmprunt.addEventListener("click", function() {redirectEmprunt(idAlbumEnCours);});
 		}
@@ -250,7 +252,8 @@
 		btnPrev.remove();
 		imgPrev.remove();
 		rowPrev.remove();
-		btnEmpPrev.remove();
+		if (roleUser === "gestionnaire") btnEmpPrev.remove();
+		
 
 	}
 	/**
@@ -291,7 +294,7 @@
 	 * Redirection vers la page de l'emprunt avec envoie de l'id en paramêtre
 	 */
 	function redirectEmprunt(idAlbumActuel) {
-		document.location.href="emprunt.html?albumid="+idAlbumActuel;
+		document.location.href="construction.html?albumid="+idAlbumActuel;
 	}
 
 

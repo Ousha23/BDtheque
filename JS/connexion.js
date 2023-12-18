@@ -1,3 +1,8 @@
+const connecte = (localStorage.getItem("idUser") !== null);
+if (connecte) {
+    document.location.href = "consultBD.html";
+}
+
 var btnConnexion = document.getElementById("connexionBtn");
 var msgErrConnexion = document.getElementById("msgErrConnexion");
 var formConnexion = document.getElementById("connexionform");
@@ -53,13 +58,17 @@ function userExiste(login, password) {
  */
 function existeAdherent(logAdherent, passAdherent) {
     let userTrouve = false;
-    adherents.forEach((values) => {
+    adherents.forEach((values, id) => {
         let loginRecupAdher = values.login;
         let passRecupAdher = values.pass;
+        let typeUser = "adherent";
+        let role = "";
 
         if (logAdherent === loginRecupAdher && passAdherent === passRecupAdher) {
             userTrouve = true;
-            return userTrouve;
+ 
+            addToLocalStorage(id,logAdherent, typeUser, role);
+            return;
         }
     });
     return userTrouve; 
@@ -73,20 +82,33 @@ function existeAdherent(logAdherent, passAdherent) {
  */
 function existeEmploye(logEmploye, passEmploye) {
     let userTrouve = false;
-
-    employes.forEach((values) => {
+    
+    employes.forEach((values, id) => {
         let loginRecupEmpl = values.login;
         let passRecupEmpl = values.pass;
-        let idRecupEmpl = values.id;
+        let typeUser = "employe";
+        let role = values.role;
 
         if (logEmploye === loginRecupEmpl && passEmploye === passRecupEmpl) {
-           userTrouve = true; 
-           return userTrouve;
+            userTrouve = true; 
+
+            addToLocalStorage(id,logEmploye,typeUser, role);
+            return
         }
     });
     return userTrouve; 
 }
 
-
-
+/**
+ * ajout des données dans le local storage
+ * @param {string} id 
+ * @param {string} login 
+ * @param {string} type 
+ */
+function addToLocalStorage(id, login, type, role) {
+    localStorage.setItem("idUser", id);
+    localStorage.setItem("login", login);
+    localStorage.setItem("typeUser", type);
+    localStorage.setItem("role", role);
+}
 

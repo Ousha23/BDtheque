@@ -1,11 +1,15 @@
+
 var menuDynamicDiv = document.getElementById("menuDynamique");
 var monComptetxt = document.getElementById("connexionLink");
 var menuCompte = document.getElementById("menuCompte");
-let idUser = "";
-let typeUser = "employe";
+var lienDeconnexion = document.getElementById("lienDeconnexion");
+
+let idUser = localStorage.getItem("idUser");
+let typeUser = localStorage.getItem("typeUser");
 
 monComptetxt.addEventListener("click", afficherMenuCompte);
 menuCompte.addEventListener("mouseleave", hideMenuCompte);
+lienDeconnexion.addEventListener("click", deconnexion);
 
 
 if (idUser) {
@@ -83,7 +87,7 @@ function creerNavGestionnaire(){
     gestMmbreDiv.setAttribute("id","gestMmbreLien");
     var gestMmbreTxt = document.createTextNode("Gestion des membres"); // Création du nœud texte
     var gestMmbreLink = document.createElement("a");
-    gestMmbreLink.setAttribute("href", "emprunt.html");
+    gestMmbreLink.setAttribute("href", "construction.html");
     gestMmbreLink.setAttribute("class", "aLinkMenu");
     gestMmbreLink.appendChild(gestMmbreTxt); 
     gestMmbreDiv.appendChild(gestMmbreLink); 
@@ -94,7 +98,7 @@ function creerNavGestionnaire(){
     gestBDDiv.setAttribute("id", "gestBDLien");
     var gestBDTxt = document.createTextNode("Gestion des BD"); // Création du nœud texte
     var gestBDLink = document.createElement("a");
-    gestBDLink.setAttribute("href", "emprunt.html");
+    gestBDLink.setAttribute("href", "construction.html");
     gestBDLink.setAttribute("class", "aLinkMenu");
     gestBDLink.appendChild(gestBDTxt); 
     gestBDDiv.appendChild(gestBDLink); 
@@ -105,7 +109,7 @@ function creerNavGestionnaire(){
     gestCatalogDiv.setAttribute("id", "gestCatalogueLien");
     var gestCatalogTxt = document.createTextNode("Gestion du catalogue"); // Création du nœud texte
     var gestCatalogLink = document.createElement("a");
-    gestCatalogLink.setAttribute("href", "emprunt.html");
+    gestCatalogLink.setAttribute("href", "construction.html");
     gestCatalogLink.setAttribute("class", "aLinkMenu");
     gestCatalogLink.appendChild(gestCatalogTxt); 
     gestCatalogDiv.appendChild(gestCatalogLink); 
@@ -116,7 +120,7 @@ function creerNavGestionnaire(){
     gestEmpruntDiv.setAttribute("id", "gestEmpruntLien");
     var gestEmpruntTxt = document.createTextNode("Gestion des Emprunts"); // Création du nœud texte
     var gestEmpruntLink = document.createElement("a");
-    gestEmpruntLink.setAttribute("href", "emprunt.html");
+    gestEmpruntLink.setAttribute("href", "construction.html");
     gestEmpruntLink.setAttribute("class", "aLinkMenu");
     gestEmpruntLink.appendChild(gestEmpruntTxt); 
     gestEmpruntDiv.appendChild(gestEmpruntLink); 
@@ -134,7 +138,7 @@ function creerNavAdherant(){
     monHistoriqueDiv.setAttribute("id","monHistoriqueLien");
     var monHistoriqueTxt = document.createTextNode("Mon historique"); // Création du nœud texte
     var monHistoriqueLink = document.createElement("a");
-    monHistoriqueLink.setAttribute("href", "emprunt.html");
+    monHistoriqueLink.setAttribute("href", "construction.html");
     monHistoriqueLink.setAttribute("class", "aLinkMenu");
     monHistoriqueLink.appendChild(monHistoriqueTxt); 
     monHistoriqueDiv.appendChild(monHistoriqueLink); 
@@ -145,7 +149,7 @@ function creerNavAdherant(){
     mesEmpruntsDiv.setAttribute("id", "mesEmpruntsLien");
     var mesEmpruntsTxt = document.createTextNode("Mes Emprunts"); // Création du nœud texte
     var mesEmpruntsLink = document.createElement("a");
-    mesEmpruntsLink.setAttribute("href", "emprunt.html");
+    mesEmpruntsLink.setAttribute("href", "construction.html");
     mesEmpruntsLink.setAttribute("class", "aLinkMenu");
     mesEmpruntsLink.appendChild(mesEmpruntsTxt); 
     mesEmpruntsDiv.appendChild(mesEmpruntsLink); 
@@ -156,7 +160,7 @@ function creerNavAdherant(){
     listeEnvieDiv.setAttribute("id", "listeEnvieLien");
     var listeEnvieTxt = document.createTextNode("Ma liste d'envie"); // Création du nœud texte
     var listeEnvieLink = document.createElement("a");
-    listeEnvieLink.setAttribute("href", "emprunt.html");
+    listeEnvieLink.setAttribute("href", "construction.html");
     listeEnvieLink.setAttribute("class", "aLinkMenu");
     listeEnvieLink.appendChild(listeEnvieTxt); 
     listeEnvieDiv.appendChild(listeEnvieLink); 
@@ -167,7 +171,7 @@ function creerNavAdherant(){
     abntDiv.setAttribute("id", "abntLien");
     var abntTxt = document.createTextNode("Mon abonnement"); // Création du nœud texte
     var abntLink = document.createElement("a");
-    abntLink.setAttribute("href", "emprunt.html");
+    abntLink.setAttribute("href", "construction.html");
     abntLink.setAttribute("class", "aLinkMenu");
     abntLink.appendChild(abntTxt); 
     abntDiv.appendChild(abntLink); 
@@ -185,7 +189,7 @@ function creerNavAdmin(){
     gererProfileDiv.setAttribute("id","gererProfileLien");
     var gererProfileTxt = document.createTextNode("Gérer les profiles"); // Création du nœud texte
     var gererProfileLink = document.createElement("a");
-    gererProfileLink.setAttribute("href", "emprunt.html");
+    gererProfileLink.setAttribute("href", "construction.html");
     gererProfileLink.setAttribute("class", "aLinkMenu");
     gererProfileLink.appendChild(gererProfileTxt); 
     gererProfileDiv.appendChild(gererProfileLink); 
@@ -203,7 +207,7 @@ function creerNavResp(){
     statistiqueDiv.setAttribute("id","gererProfileLien");
     var statistiqueTxt = document.createTextNode("Statistiques"); // Création du nœud texte
     var statistiqueLink = document.createElement("a");
-    statistiqueLink.setAttribute("href", "emprunt.html");
+    statistiqueLink.setAttribute("href", "construction.html");
     statistiqueLink.setAttribute("class", "aLinkMenu");
     statistiqueLink.appendChild(statistiqueTxt); 
     statistiqueDiv.appendChild(statistiqueLink); 
@@ -214,7 +218,7 @@ function creerNavResp(){
     retardJourDiv.setAttribute("id","gererProfileLien");
     var retardJourTxt = document.createTextNode("Retards du jour"); // Création du nœud texte
     var retardJourLink = document.createElement("a");
-    retardJourLink.setAttribute("href", "emprunt.html");
+    retardJourLink.setAttribute("href", "construction.html");
     retardJourLink.setAttribute("class", "aLinkMenu");
     retardJourLink.appendChild(retardJourTxt); 
     retardJourDiv.appendChild(retardJourLink); 
@@ -225,10 +229,18 @@ function creerNavResp(){
     consultRetardDiv.setAttribute("id","gererProfileLien");
     var consultRetardTxt = document.createTextNode("Consulter les retards"); // Création du nœud texte
     var consultRetardLink = document.createElement("a");
-    consultRetardLink.setAttribute("href", "emprunt.html");
+    consultRetardLink.setAttribute("href", "construction.html");
     consultRetardLink.setAttribute("class", "aLinkMenu");
     consultRetardLink.appendChild(consultRetardTxt); 
     consultRetardDiv.appendChild(consultRetardLink); 
     menuDynamicDiv.appendChild(consultRetardDiv);
 
+}
+
+/**
+ * Supprime les données du localStorage et raffraichi la page
+ */
+function deconnexion () {
+    localStorage.clear();
+    location.reload();
 }
