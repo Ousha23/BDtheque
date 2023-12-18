@@ -7,6 +7,7 @@ button {
     border: white;
     color: white;
     border-radius: 15px;
+    height: 25px;
     width: 150px;
     box-shadow : 5px 5px 10px 0px rgba(0,0,0,0.44);
     font-family: 'Roboto', sans-serif;
@@ -93,5 +94,9 @@ a.aLinkMenu, a#connexionLink{
 .list-group-item:hover {
     background-color: #A9A9A9;
     color: black;
+}
+
+#menuConnexionCompte:hover {
+    cursor: pointer;
 }
 /* partie menu - Fin */

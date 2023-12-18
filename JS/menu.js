@@ -1,17 +1,20 @@
 var menuDynamicDiv = document.getElementById("menuDynamique");
-var compteConnecte = document.getElementById("connexionLink");
+var monComptetxt = document.getElementById("connexionLink");
 var menuCompte = document.getElementById("menuCompte");
-let idUser = "1";
+let idUser = "";
 let typeUser = "employe";
 
-compteConnecte.addEventListener("click", afficherMenuCompte);
+monComptetxt.addEventListener("click", afficherMenuCompte);
 menuCompte.addEventListener("mouseleave", hideMenuCompte);
 
 
 if (idUser) {
     var login = afficherMenu(idUser, typeUser);
     afficherMonCompte(login);   
-}
+} else {
+    monComptetxt.removeEventListener("click", afficherMenuCompte);
+    monComptetxt.addEventListener("click", renvoieConnexion);
+} 
 ///////////////////////// Fonctions ////////////////
 /**
  * Contrôle avant affichage menu selon utilisateur
@@ -50,7 +53,6 @@ function afficherMenu (idUser, typeUser){
  */
 function afficherMonCompte (login) {
     if (login !== undefined) {
-        var monComptetxt = document.getElementById("connexionLink");
         monComptetxt.innerText = login;
     }
 }
@@ -59,8 +61,11 @@ function afficherMonCompte (login) {
  * affiche le menu (mon Profil et Deconnexion) au clique sur le username
  */
 function afficherMenuCompte (){
-    var menuCompte = document.getElementById("menuCompte");
     menuCompte.classList.remove("hide");
+}
+
+function renvoieConnexion (){
+    document.location.href = "connexion.html"
 }
 
 function hideMenuCompte() {
