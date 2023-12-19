@@ -60,12 +60,9 @@ adherents.set("006", {
   pass: "annabertrand!",
 });
 
-
 /*
 // Affichage des résultats dans la console (facultatif)
 adherents.forEach((value, key) => {
   console.log(key, value);
 });
     */
-
-

@@ -119,7 +119,7 @@
     <p id="messageAjout"></p>
 
     <h2>Adhérents ajoutés:</h2>
-    <ul id="listeAdherents"></ul>
+
     <div id="tableContainer" class="hide">
       <table id="listePers" class="table table-bordered border-black">
         <thead>
@@ -134,7 +134,7 @@
         <tbody class="table-group-divider" id="tableId"></tbody>
       </table>
     </div>
-
+    <!--
     <h2>Détails des adhérents :</h2>
     <div id="detailsAdherents"></div>
 
@@ -201,10 +201,9 @@
     <p id="messageSuppression"></p>
 
     <p id="messageSuppression"></p>
-    <!--   <script src="js/adherents.js"></script>-->
+     <script src="js/adherents.js"></script>-->
+    <script src="js/ad.js"></script>
 
-    <script src="js/map.js"></script>
-<script src="js/ad.js"></script>
     <script>
       /*  this.adherents = new Map([
         [
@@ -424,7 +423,7 @@ function Adherent(nom, prenom, email) {
         messageAjout.textContent = "Un nouvel adhérent a été ajouté.";
         clearMessage(messageAjout);
       });
-*/
+
 
 
       modifierAdherentForm.addEventListener("submit", function (event) {
@@ -477,8 +476,8 @@ function Adherent(nom, prenom, email) {
 
       function emailExists(email) {
         return listeAdherents.some((adherent) => adherent.email === email);
-      }
-      function modifierAdherent(nom, prenom, nouvelEmail) {
+      }*/
+      /*    function modifierAdherent(nom, prenom, nouvelEmail) {
         let found = false;
 
         for (let i = 0; i < listeAdherents.length; i++) {
@@ -547,6 +546,7 @@ function Adherent(nom, prenom, email) {
         }<br>--------------`;
       }
 
+    
       const supprimerAdherentForm = document.getElementById(
         "supprimerAdherentForm"
       );
@@ -589,7 +589,7 @@ function Adherent(nom, prenom, email) {
             messageSuppression.textContent = "";
           }, 3000);
         }
-      }
+      }*/
     </script>
   </body>
 </html>
