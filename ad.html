@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-<!-- 
+        <!-- 
         <nav id="navbarEmployer" class="navbar">
           <a href="#">Ajouter un adhérent</a>
           <a href="#">Gestion des Emprunts</a>
@@ -113,31 +113,30 @@
 
       <button type="submit">Ajouter Adhérent</button>
 
-      <button type="submit">liste des Adhérents</button>
+      <a href="liste-adherents.html">Liste de tous les adhérents</a>
     </form>
 
     <p id="messageAjout"></p>
-    
+
     <h2>Adhérents ajoutés:</h2>
     <ul id="listeAdherents"></ul>
     <div id="tableContainer" class="hide">
-        <table id="listePers" class="table table-bordered border-black">
-          <thead>
-            <tr>
-              <th scope="col" class="col-2">Id</th>
-              <th scope="col" class="col-2">Nom</th>
-              <th scope="col" class="col-2">Prenom</th>
-              <th scope="col" class="col-2">Email</th>
-              <th scope="col" class="col-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="table-group-divider" id="tableId"></tbody>
-        </table>
-      </div>
-   
+      <table id="listePers" class="table table-bordered border-black">
+        <thead>
+          <tr>
+            <th scope="col" class="col-2">Id</th>
+            <th scope="col" class="col-2">Nom</th>
+            <th scope="col" class="col-2">Prenom</th>
+            <th scope="col" class="col-2">Email</th>
+            <th scope="col" class="col-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tableId"></tbody>
+      </table>
+    </div>
+
     <h2>Détails des adhérents :</h2>
     <div id="detailsAdherents"></div>
-
 
     <h2>Modifier l'email d'un adhérent :</h2>
     <form id="modifierAdherentForm">
@@ -198,14 +197,16 @@
 
       <button type="submit">Supprimer Adhérent</button>
     </form>
- 
+
     <p id="messageSuppression"></p>
 
     <p id="messageSuppression"></p>
     <!--   <script src="js/adherents.js"></script>-->
 
+    <script src="js/map.js"></script>
+<script src="js/ad.js"></script>
     <script>
-    /*  this.adherents = new Map([
+      /*  this.adherents = new Map([
         [
           "001",
           {
@@ -279,17 +280,80 @@
           },
         ],
       ]);
-*/
-var adherents = new Map ();
-    adherents.set("001", {codeAdherent: "001", nom : "balibo", prenom : "jean",  email:"jean.balibo@email.fr",login :"adherent001", pass: "balibo001", emprunts: [], retour: []});
-    adherents.set("002", {codeAdherent: "002", nom : "papa", prenom : "noel",  email:"panoel@email.fr",login :"adherent002", pass: "papa002", emprunts: [], adesion:new Date("2022-12-10")});
-  function Adherent(nom, prenom, email) {
+
+var adherents = new Map();
+
+adherents.set("001", {
+  codeAdherent: "001",
+  nom: "Dupont",
+  prenom: "Jean",
+  email: "jean.dupont@email.com",
+  dateAdhesion: new Date("2022-12-10"),
+  login: "Dupont.ad",
+  pass: "jeandupont!",
+});
+
+adherents.set("002", {
+  codeAdherent: "002",
+  nom: "Martin",
+  prenom: "Sophie",
+  email: "sophie.martin@email.com",
+  dateAdhesion: new Date("2022-12-11"),
+  login: "Martin.so",
+  pass: "sophiemartin!",
+});
+
+adherents.set("003", {
+  codeAdherent: "003",
+  nom: "Lefevre",
+  prenom: "Pierre",
+  email: "pierre.lefevre@email.com",
+  dateAdhesion: new Date("2022-12-12"),
+  login: "Lefevre.pi",
+  pass: "pierrelefevre!",
+});
+
+adherents.set("004", {
+  codeAdherent: "004",
+  nom: "Dufour",
+  prenom: "Marie",
+  email: "marie.dufour@email.com",
+  dateAdhesion: new Date("2022-12-13"),
+  login: "Dufour.ma",
+  pass: "mariedufour!",
+});
+
+adherents.set("005", {
+  codeAdherent: "005",
+  nom: "Leroy",
+  prenom: "Lucas",
+  email: "lucas.leroy@email.com",
+  dateAdhesion: new Date("2022-12-14"),
+  login: "Leroy.lu",
+  pass: "lucasleroy!",
+});
+
+adherents.set("006", {
+  codeAdherent: "006",
+  nom: "Bertrand",
+  prenom: "Anna",
+  email: "anna.bertrand@email.com",
+  dateAdhesion: new Date("2022-12-15"),
+  login: "Bertrand.an",
+  pass: "annabertrand!",
+});
+
+// Affichage des résultats dans la console (facultatif)
+adherents.forEach((value, key) => {
+  console.log(key, value);
+});
+ 
+function Adherent(nom, prenom, email) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
       }
 
-      
       // Fonction pour afficher les détails des adhérents
       function afficherDetailsAdherents() {
         const detailsAdherentsElement =
@@ -312,13 +376,12 @@ var adherents = new Map ();
         `;
 
           detailsAdherentsElement.appendChild(detailsAdherent);
-        });*/
+        });
       }
 
       // Appelez cette fonction pour afficher les détails des adhérents dans votre interface utilisateur
       afficherDetailsAdherents();
 
-    
       // Création d'une liste vide d'adhérents
       let listeAdherents = [];
 
@@ -326,7 +389,8 @@ var adherents = new Map ();
       const listeAdherentsElement = document.getElementById("listeAdherents");
       const modifierAdherentForm = document.getElementById(
         "modifierAdherentForm"
-      );
+      ); 
+
       const messageModification = document.getElementById(
         "messageModification"
       );
@@ -360,6 +424,8 @@ var adherents = new Map ();
         messageAjout.textContent = "Un nouvel adhérent a été ajouté.";
         clearMessage(messageAjout);
       });
+*/
+
 
       modifierAdherentForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -381,15 +447,15 @@ var adherents = new Map ();
       }
 
       function afficherAdherents() {
-  const tableIdElement = document.getElementById("tableId");
-  tableIdElement.innerHTML = ""; // Nettoie le contenu actuel
+        const tableIdElement = document.getElementById("tableId");
+        tableIdElement.innerHTML = ""; // Nettoie le contenu actuel
 
-  listeAdherents.forEach(function (adherent, index) {
-    // Crée une nouvelle ligne pour chaque adhérent
-    const tableRow = document.createElement("tr");
+        listeAdherents.forEach(function (adherent, index) {
+          // Crée une nouvelle ligne pour chaque adhérent
+          const tableRow = document.createElement("tr");
 
-    // Remplit la ligne avec les détails de l'adhérent
-    tableRow.innerHTML = `
+          // Remplit la ligne avec les détails de l'adhérent
+          tableRow.innerHTML = `
       <td class="col-2">${index + 1}</td>
       <td class="col-2">${adherent.nom}</td>
       <td class="col-2">${adherent.prenom}</td>
@@ -400,15 +466,14 @@ var adherents = new Map ();
       </td>
     `;
 
-    // Ajoute la ligne à la table
-    tableIdElement.appendChild(tableRow);
-  });
+          // Ajoute la ligne à la table
+          tableIdElement.appendChild(tableRow);
+        });
 
-  // Vous pouvez également ajouter ici le code pour afficher le conteneur du tableau
-  const tableContainer = document.getElementById("tableContainer");
-  tableContainer.classList.remove("hide");
-}
-
+        // Vous pouvez également ajouter ici le code pour afficher le conteneur du tableau
+        const tableContainer = document.getElementById("tableContainer");
+        tableContainer.classList.remove("hide");
+      }
 
       function emailExists(email) {
         return listeAdherents.some((adherent) => adherent.email === email);
