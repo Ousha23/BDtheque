@@ -1,6 +1,6 @@
 const connecte = (localStorage.getItem("idUser") !== null);
 if (connecte) {
-    document.location.href = "consultBD.html";
+    document.location.href = "index.html";
 }
 
 var btnConnexion = document.getElementById("connexionBtn");

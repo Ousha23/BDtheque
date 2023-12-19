@@ -16,12 +16,20 @@ img:hover {
     display: row;
 }
 
-table {
+#tableDetailBD > tr > td {
     border: 1px solid black;
+    text-align: left;
+    padding-left: 5px;
+    
+}
+.thDetailBD {
+    background-color: #e6e6e6;
+    font-weight: bolder;
+    font-style: italic;
 }
 
 .addMarge {
-    margin: 5em;
+    margin: 2em;
 }
 
 .grdImgBD {
@@ -33,6 +41,7 @@ table {
     width: 100px;
     font-size: 10px;
     margin-left: 10px;
+    height: 15px;
 }
 
 #formRecherche > div> div> input {
@@ -50,5 +59,9 @@ table {
     border: 1px solid #A9A9A9;
     border-radius: 10px;
     background-color: #e6e6e6;
+}
+
+.full:hover {
+    -webkit-transform: scale(1.1);
 }
 

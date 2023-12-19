@@ -7,6 +7,7 @@
 
 	var miniBD = document.getElementById("listeBD");
 	var barreRecherche = document.getElementById("formRecherche");
+	
 
 	var album = albums.get("6");
 	var serie = series.get(album.idSerie);
@@ -42,13 +43,13 @@
 				var newDivCol = document.createElement("div");
 				var newImg = document.createElement("img");
 		
-				newDivCol.setAttribute("class", "col-6 col-sm-4 col-md-3 col-lg-2");
+				newDivCol.setAttribute("class", "col-12 col-sm-4 col-md-3 col-lg-2");
 				
 				newImg.setAttribute("src",showMiniAlbums(titreBD));
 				newImg.setAttribute("alt",nameBDAlt +".jpg");
 				
 				newImg.setAttribute("id", "album-"+idAlbum);
-				newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded");
+				newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded full");
 				
 				newDivCol.appendChild(newImg);
 				miniBD.appendChild(newDivCol);
@@ -148,46 +149,111 @@
 		barreRecherche.classList.add("hide");
 
 
-		var row = document.createElement("tr")
-		row.setAttribute("id","row")
-
 		// afficher les colonnes du tableau en affichant les info venant de la BDD
-		// serie 
-		var cellSerie = document.createElement("td");
-		var cellTextSerie = document.createTextNode(laSerie.nom);
-		cellSerie.appendChild(cellTextSerie);
-		row.appendChild(cellSerie);
-		tDetailBD.appendChild(row);
+		
+		var tableBDDetail = document.getElementById("tableDetailBD");
+		// série
+		var trSerieDetail = document.createElement("tr");
+		var tdSerieHead = document.createElement("td");
+		tdSerieHead.setAttribute("class","thDetailBD ");
+		var tdSerieTitre = document.createElement("td");
+		var headSerietxt = document.createTextNode("Série");
+		var titreSerietxt = document.createTextNode(laSerie.nom);
+		tdSerieHead.appendChild(headSerietxt);
+		tdSerieTitre.appendChild(titreSerietxt);
+		trSerieDetail.appendChild(tdSerieHead);
+		trSerieDetail.appendChild(tdSerieTitre); 
+		tableBDDetail.appendChild(trSerieDetail);
+		// Album n
+		var trAlbumN = document.createElement("tr");
+		var tdAlbumHead = document.createElement("td");
+		tdAlbumHead.classList.add("thDetailBD");
+		var tdAlbumTitre = document.createElement("td");
+		var headAlbumtxt = document.createTextNode("Album N°");
+		var titreAlbumtxt = document.createTextNode(albumEnCours.numero);
+		tdAlbumHead.appendChild(headAlbumtxt);
+		tdAlbumTitre.appendChild(titreAlbumtxt);
+		trAlbumN.appendChild(tdAlbumHead);
+		trAlbumN.appendChild(tdAlbumTitre); 
+		tableBDDetail.appendChild(trAlbumN);
 
-		// num album 
-		var cellAlbum = document.createElement("td");
-		var cellTextAlbum = document.createTextNode(albumEnCours.numero);
-		cellAlbum.appendChild(cellTextAlbum);
-		row.appendChild(cellAlbum);
-		tDetailBD.appendChild(row);
+		// Album n
+		var trTitre = document.createElement("tr");
+		var tdTitreHead = document.createElement("td");
+		tdTitreHead.classList.add("thDetailBD");
+		var tdTitreTitre = document.createElement("td");
+		var headTitretxt = document.createTextNode("Titre");
+		var titreTitretxt = document.createTextNode(albumEnCours.titre);
+		tdTitreHead.appendChild(headTitretxt);
+		tdTitreTitre.appendChild(titreTitretxt);
+		trTitre.appendChild(tdTitreHead);
+		trTitre.appendChild(tdTitreTitre); 
+		tableBDDetail.appendChild(trTitre);
 
-		// num titre 
-		var cellTitre = document.createElement("td");
-		var cellTextTitre = document.createTextNode(albumEnCours.titre);
-		cellTitre.appendChild(cellTextTitre);
-		row.appendChild(cellTitre);
-		tDetailBD.appendChild(row);
-
-		// nom auteur 
-		var cellAuteur = document.createElement("td");
-		var cellTextAuteur = document.createTextNode(lAuteur.nom);
-		cellAuteur.appendChild(cellTextAuteur);
-		row.appendChild(cellAuteur);
-		tDetailBD.appendChild(row);
+		// Auteur
+		var trAuteur = document.createElement("tr");
+		var tdAuteurHead = document.createElement("td");
+		tdAuteurHead.classList.add("thDetailBD");
+		var tdAuteurTitre = document.createElement("td");
+		var headAuteurtxt = document.createTextNode("Auteur");
+		var titreAuteurtxt = document.createTextNode(lAuteur.nom);
+		tdAuteurHead.appendChild(headAuteurtxt);
+		tdAuteurTitre.appendChild(titreAuteurtxt);
+		trAuteur.appendChild(tdAuteurHead);
+		trAuteur.appendChild(tdAuteurTitre); 
+		tableBDDetail.appendChild(trAuteur);
 
 		//nbr Exemplaire
-		var cellExplaire = document.createElement("td");
-		var cellTextExplaire = document.createTextNode(nbExempEnCours);
-		cellExplaire.appendChild(cellTextExplaire);
-		row.appendChild(cellExplaire);
-		tDetailBD.appendChild(row);
+		var trExemplaire = document.createElement("tr");
+		var tdExemplaireHead = document.createElement("td");
+		tdExemplaireHead.classList.add("thDetailBD");
+		var tdExemplaireTitre = document.createElement("td");
+		var headExemplairetxt = document.createTextNode("Exemplaires disponibles");
+		var titreExemplairetxt = document.createTextNode(nbExempEnCours);
+		tdExemplaireHead.appendChild(headExemplairetxt);
+		tdExemplaireTitre.appendChild(titreExemplairetxt);
+		trExemplaire.appendChild(tdExemplaireHead);
+		trExemplaire.appendChild(tdExemplaireTitre); 
+		tableBDDetail.appendChild(trExemplaire);
+	
+		// // serie 
+		// var cellSerie = document.createElement("td");
+		// var cellTextSerie = document.createTextNode(laSerie.nom);
+		// cellSerie.appendChild(cellTextSerie);
+		// row.appendChild(cellSerie);
+		// tDetailBD.appendChild(row);
 		
-		document.getElementById("tBD").appendChild(tDetailBD);
+
+
+		// // num album 
+		// var cellAlbum = document.createElement("td");
+		// var cellTextAlbum = document.createTextNode(albumEnCours.numero);
+		// cellAlbum.appendChild(cellTextAlbum);
+		// row.appendChild(cellAlbum);
+		// tDetailBD.appendChild(row);
+
+		// // num titre 
+		// var cellTitre = document.createElement("td");
+		// var cellTextTitre = document.createTextNode(albumEnCours.titre);
+		// cellTitre.appendChild(cellTextTitre);
+		// row.appendChild(cellTitre);
+		// tDetailBD.appendChild(row);
+
+		// // nom auteur 
+		// var cellAuteur = document.createElement("td");
+		// var cellTextAuteur = document.createTextNode(lAuteur.nom);
+		// cellAuteur.appendChild(cellTextAuteur);
+		// row.appendChild(cellAuteur);
+		// tDetailBD.appendChild(row);
+
+		// //nbr Exemplaire
+		// var cellExplaire = document.createElement("td");
+		// var cellTextExplaire = document.createTextNode(nbExempEnCours);
+		// cellExplaire.appendChild(cellTextExplaire);
+		// row.appendChild(cellExplaire);
+		// tDetailBD.appendChild(row);
+		
+		// document.getElementById("tBD").appendChild(tDetailBD);
 		
 		if (nbExempEnCours !== 0  && roleUser === "gestionnaire"){
 			var btnEmprunt = creerBtns("Emprunter","empruntBtnID");
@@ -196,6 +262,7 @@
 
 		var btnRetour = creerBtns("Retour","previousBtn");
 		btnRetour.addEventListener("click", function()  {previous ();});
+
 	}
 
 	/**
@@ -221,15 +288,16 @@
 	 */
 	function creerBtns(txt,idBtn) {
 		// boutton retour
-		var descriptBD = document.getElementById("descriptBD")
-		var divbtn = document.getElementById("btnsDiv")
+		var descriptBD = document.getElementById("descriptBD");
+		var divBtnTable = document.getElementById("divdirecttableDetailBD");
+		var divbtn = document.getElementById("btnsDiv");
 		var btn = document.createElement("button");
 		var t = document.createTextNode(txt);
 		
 		btn.setAttribute("id", idBtn);
 		btn.setAttribute("class", "btnBD m-1");
 
-		descriptBD.appendChild(divbtn);
+		divBtnTable.appendChild(divbtn);
 		divbtn.appendChild(btn);
 		btn.appendChild(t);
 
@@ -245,16 +313,17 @@
 	 * Supprime les éléments affichant le détail de la BD séléctionnées
 	 */
 	function deleteElmts() {
+		
 		var btnPrev = document.getElementById("previousBtn");
 		var imgPrev = document.getElementById("currentBD");
-		var rowPrev = document.getElementById("row");
+		var tableBDDetail = document.getElementById("tableDetailBD");
 		var btnEmpPrev = document.getElementById("empruntBtnID");
 		btnPrev.remove();
 		imgPrev.remove();
-		rowPrev.remove();
+		tableBDDetail.innerHTML = "";
 		if (roleUser === "gestionnaire") btnEmpPrev.remove();
 		
-
+	
 	}
 	/**
 	 * Permet le retour vers l'affichage de la liste globale des BD
@@ -296,6 +365,5 @@
 	function redirectEmprunt(idAlbumActuel) {
 		document.location.href="construction.html?albumid="+idAlbumActuel;
 	}
-
 
 
