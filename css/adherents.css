@@ -1,46 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&family=Roboto:wght@400;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&family=Roboto:wght@400;900&display=swap");
 
 
-hide {
-    display: none;
-  }
-  
-  #tableContainer {
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  #listePers {
-    margin-top: 20px;
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  #listePers th,
-  #listePers td {
-    text-align: center;
-    padding: 8px;
-    border: 1px solid #000;
-  }
-  
-  #listePers th {
-    background-color: #343a40;
-    color: #ffffff;
-  }
-  
-  #listePers tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  #listePers tbody tr:hover {
-    background-color: gray;
-  }
-  
-  #tableContainer button {
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  /* Ajoutez d'autres styles au besoin */
 
+.hide {
+  display: none;
+}
 
+#tableContainer {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#listePers {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#listePers th,
+#listePers td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #000;
+}
+
+#listePers th {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+#listePers tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#listePers tbody tr:hover {
+  background-color: gray;
+}
+
+#tableContainer button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Ajoutez d'autres styles au besoin */
