@@ -1,27 +1,25 @@
 #connexionform {
     border: 1px solid #A9A9A9;
     height: max-content;
-    padding-inline: 25px;
-    padding-top: 25px;
-    margin-bottom: 10em;
-    background-color: #F5F6F8;
+    padding: 25px;
+    background-color: hsl(220, 18%, 97%);
     border-radius: 10px;
-    width: 25em;
+    width: 29em;
+    margin-top: 30px;
 }
 
 #msgBienvenue {
     margin: 30px;
     color: #ff6944;
-    font-size: medium;
 }
 
 #labelPassword, #labelLogin {
-    font-size: larger;
+    font-size: 20px;
     font-weight: bolder;
 }
 
 #inputPassword::placeholder, #inputLogin::placeholder {
-    font-size: smaller;
+    font-size: 15px;
 }
 
 #recupPwdLink {
@@ -31,7 +29,7 @@
 }
 
 #recupPwdMsg {
-    font-size: xx-small;
+    font-size: x-small;
 }
 
 #msgErrConnexion {
@@ -39,7 +37,8 @@
     font-family: 'Roboto';
     border-radius: 10px;
     background-color: #e6e6e6; 
-    border: #A9A9A9 solid 1px;  
+    border: #A9A9A9 solid 1px;
+    margin: 30px;  
 }
 
 #divMsgErrConnexion {

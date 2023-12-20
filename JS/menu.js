@@ -68,10 +68,15 @@ function afficherMenuCompte (){
     menuCompte.classList.remove("hide");
 }
 
+/**
+ * renvoi vers la page de connexion si aucun compte connecté
+ */
 function renvoieConnexion (){
     document.location.href = "connexion.html"
 }
-
+/**
+ * Cache le menu mon compte et deconnexion
+ */
 function hideMenuCompte() {
     var menuCompte = document.getElementById("menuCompte");
     menuCompte.classList.add("hide");
@@ -189,7 +194,7 @@ function creerNavAdmin(){
     gererProfileDiv.setAttribute("id","gererProfileLien");
     var gererProfileTxt = document.createTextNode("Gérer les profiles"); // Création du nœud texte
     var gererProfileLink = document.createElement("a");
-    gererProfileLink.setAttribute("href", "construction.html");
+    gererProfileLink.setAttribute("href", "gestionProfils.html");
     gererProfileLink.setAttribute("class", "aLinkMenu");
     gererProfileLink.appendChild(gererProfileTxt); 
     gererProfileDiv.appendChild(gererProfileLink); 
@@ -242,5 +247,5 @@ function creerNavResp(){
  */
 function deconnexion () {
     localStorage.clear();
-    location.reload();
+    document.location.href = "index.html";
 }

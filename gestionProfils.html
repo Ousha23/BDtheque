@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/normalize.css">
+    <link rel="stylesheet" href="./CSS/global.css">
+    <link rel="stylesheet" href="./CSS/gestionProfils.css">
+    <title>Gestion des profils</title>
+</head>
+<body>
+    <header class="sticky-top" id="headerGlobal">
+        <nav>
+            <div class="menuFixe justify-content-between row">
+                <a class="navbar-brand col-4" href="index.html">
+                    <img class="col-8 col-md-6 col-lg-5" src="ressources/img/logo.png" alt="logo BDthèque">
+                </a>
+                <div class="form-inline col-4 col-sm-3 col-md-2 mt-2 connexionLink">
+                    <div class="input-group" id="menuConnexionCompte">
+                        <div class="input-group-prepend">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                            <a id="connexionLink">connexion</a>
+                            <div class="list-grou positionBurger hide" id="menuCompte">
+                                <a href="construction.html" class="list-group-item">Mon Compte</a>
+                                <a href="" id="lienDeconnexion" class="list-group-item">Deconnexion</a>
+                            </div>
+                    </div>
+                </div> 
+            </div>
+            
+            <div class="menuDynamique row text-center" id="menuDynamique">
+            
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-2 m-0" id="maingestionprofil">
+        <div class="d-flex m-auto h-75" id="divEnsemble">
+            <section class="col-12 col-sm-8 m-3 d-sm-flex flex-sm-column justify-content-center mx-auto" id="sectionFormAjoutEmp">
+                <div>
+                    <p id="msgErrGestionEmp"></p>
+                </div>
+                <form action="" class="m-4 p-3" id="formAjoutEmp">
+                    <div class="row m-1">
+                        <label class="col-12 col-sm-6" for="nomEmploye">Nom</label>
+                        <input class="col-12 col-sm-6" type="text" name="nomEmploye" id="nomEmploye">
+                    </div>
+                    <div class="row m-1">
+                        <label class="col-12 col-sm-6" for="prenomEmploye">Prénom</label>
+                        <input class="col-12 col-sm-6" type="text" name="prenomEmploye" id="prenomEmploye">
+                    </div>
+                    <div class="row m-1">
+                        <label class="col-12 col-sm-6" for="mailEmploye">Adresse Email</label>
+                        <input class="col-12 col-sm-6" type="text" name="mailEmploye" id="mailEmploye">
+                    </div>
+                    <div class="row m-1">
+                        <label class="col-12 col-sm-6" for="loginEmploye">Nom d'utilisateur</label>
+                        <input class="col-12 col-sm-6" type="text" name ="loginEmploye" id="loginEmploye">
+                    </div>
+                    <div class="row m-1">
+                        <label class="col-12 col-sm-6" for="passEmploye">Mot de passe</label>
+                        <input class="col-12 col-sm-6" type="password" name="passEmploye" id="passEmploye">
+                    </div>
+                    <div class="row m-1">
+                        <label class="col-12 col-sm-6" for="confirmPassEmploye">Confirmer le mot de passe</label>
+                        <input class="col-12 col-sm-6" type="password" name="confirmPassEmploye" id="confirmPassEmploye">
+                    </div>
+                    <div class=" row m-4 justify-content-center">
+                        <div class="col-12 col-sm-4">
+                            <label for="roleGestionnaire">Gestionnaire</label>
+                            <input type="radio" name="role" id="roleGestionnaire">
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <label for="roleResp">Responsable</label>
+                            <input type="radio" name="role" id="roleResp">
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <label for="roleAdmin">Administrateur</label>
+                            <input type="radio" name="role" id="roleAdmin">
+                        </div>
+                        
+                    </div>
+                    <div class="row justify-content-center">
+                        <button class="col-3 m-2" type="submit" id="btnAjoutEmp">Ajouter</button>
+                        <button class="col-3 m-2" type="reset">Annuler</button>
+                    </div>
+                </form>
+            </section>
+            <aside class="col-12 col-sm-3 order-first m-3 d-sm-flex flex-sm-column justify-content-center" id="asideLiens">
+                <a href="" id="lienAjoutEmp" class="my-3">Ajouter un employé</a>
+                <a href="" id="lienAnnulAjoutEmp" class="my-3">Afficher la liste des employés</a>
+            </aside>
+        </div>
+        
+    </main>
+    <footer id="footer" class="pt-1">
+        <p class="text-center ">&copy; Copyright 2023, Bouchra - Leila - Jean-Eudes</p>
+    </footer>
+    <script src="./ressources/data/employes.js"></script>
+    <script src="./ressources/data/adherents.js"></script>
+    <script src="./JS/menu.js"></script>
+    <script src="./JS/gestionProfils.js"></script>
+</body>
+</html>

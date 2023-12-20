@@ -7,18 +7,44 @@
 
 	var miniBD = document.getElementById("listeBD");
 	var barreRecherche = document.getElementById("formRecherche");
-	
-
+	var rechercheMotCle = document.getElementById("rechercheMotCle");
+	var rechercheBtn = document.getElementById("btnRecherche");
+	var tempExmpl = "";
 	var album = albums.get("6");
 	var serie = series.get(album.idSerie);
 	var auteur = auteurs.get(album.idAuteur);
 
 	var descriptBD = document.getElementById("descriptBD");
 
+	afficheTabBDDynamic("","","","");
 
+	// ajout d'un listener pour suivre l'écriture au niveau de l input recherche mot clé
+	rechercheMotCle.addEventListener("input", function(e) {
+		var motRecherche = rechercheMotCle.value;
+		document.getElementById("idInputSerie").value = "";
+		document.getElementById("idInputAuteur").value ="";
+		document.getElementById("idInputTitre").value ="";
+		afficheTabBDDynamic(motRecherche,null,null,null);
+	});
+
+	// ajout d'un listener au click pour effectuer la recherche par input serie / auteur / titre
+	rechercheBtn.addEventListener("click", function() {
+		var serieRech = document.getElementById("idInputSerie").value;
+		var auteurRech = document.getElementById("idInputAuteur").value;
+		var titreRech = document.getElementById("idInputTitre").value;
+		document.getElementById("rechercheMotCle").value = "";
+		afficheTabBDDynamic(null, titreRech, serieRech, auteurRech);
+	});
+	
+	//////////////////// Fonctions //////////////////////:
+	/**
+	 * Affiche les images et résultats de recherche
+	 * @param {string} motCle 
+	 * @param {string} titreRech 
+	 * @param {string} serieRech 
+	 * @param {string} auteurRech 
+	 */
 	function afficheTabBDDynamic(motCle, titreRech, serieRech, auteurRech){
-	// insère les images après formatage des données
-	// ajout l'idAlbum dans la boucle 
 	
 		while (miniBD.firstChild) {
 			miniBD.removeChild(miniBD.firstChild);
@@ -45,7 +71,7 @@
 		
 				newDivCol.setAttribute("class", "col-12 col-sm-4 col-md-3 col-lg-2");
 				
-				newImg.setAttribute("src",showMiniAlbums(titreBD));
+				newImg.setAttribute("src",afficheMiniImg(titreBD));
 				newImg.setAttribute("alt",nameBDAlt +".jpg");
 				
 				newImg.setAttribute("id", "album-"+idAlbum);
@@ -54,7 +80,7 @@
 				newDivCol.appendChild(newImg);
 				miniBD.appendChild(newDivCol);
 		
-				newImg.addEventListener("click", function()  {showDetailBD(newImg, titreBD);});
+				newImg.addEventListener("click", function()  {afficheDetailsBD(newImg, titreBD);});
 			} 
 		});
 		if (aucunResultat) {
@@ -65,34 +91,13 @@
 		}
 	}
 
-	afficheTabBDDynamic("","","","");
-
-	// ajout d'un listener pour suivre l'écriture au niveau de l input recherche mot clé
-	var rechercheMotCle = document.getElementById("rechercheMotCle");
-	rechercheMotCle.addEventListener("input", function(e) {
-		var motRecherche = rechercheMotCle.value;
-		document.getElementById("idInputSerie").value = "";
-		document.getElementById("idInputAuteur").value ="";
-		document.getElementById("idInputTitre").value ="";
-		afficheTabBDDynamic(motRecherche,null,null,null);
-	});
-
-	// ajout d'un listener au click pour effectuer la recherche par input serie / auteur / titre
-	var rechercheBtn = document.getElementById("btnRecherche");
-	rechercheBtn.addEventListener("click", function() {
-		var serieRech = document.getElementById("idInputSerie").value;
-		var auteurRech = document.getElementById("idInputAuteur").value;
-		var titreRech = document.getElementById("idInputTitre").value;
-		document.getElementById("rechercheMotCle").value = "";
-		afficheTabBDDynamic(null, titreRech, serieRech, auteurRech);
-	});
 	
 	/**
 	 * Permet le formatage des données en titre de l'img 
 	 * @param {string} nomFiction 
 	 * @returns le contenu src de l'img
 	 */
-    function showMiniAlbums (nomFiction){
+    function afficheMiniImg (nomFiction){
 		if (!serie.nom || !album.numero || !album.titre) {
 			return SRC_IMG+SRC_DEFAULT+nomFiction+".jpg";	
 		} else {
@@ -106,7 +111,7 @@
 	 * @param {string} nomFiction 
 	 * @returns le contenu src de l'img
 	 */
-	function showGrandeImage (nomFiction){
+	function afficherGrandeImg (nomFiction){
 		if (!serie.nom || !album.numero || !album.titre) {
 			return SRC_IMG+SRC_DEFAULT+nomFiction+".jpg";	
 		} else {
@@ -119,7 +124,7 @@
 	 * @param {string} BDalt 
 	 * @param {string} title 
 	 */
-	function showDetailBD (BDalt, title) {
+	function afficheDetailsBD (BDalt, title) {
 		BDalt = BDalt.getAttribute("id");
 
 		// Récupérer les infos de la BDD
@@ -128,6 +133,7 @@
 		var lAuteur = auteurs.get(albumEnCours.idAuteur);
 		var laSerie = series.get(albumEnCours.idSerie);
 		var nbExempEnCours = nbrExmplairesAlbum(idAlbumEnCours);
+		tempExmpl = nbExempEnCours;
 		var titreBDAvantAdaptation = serie.nom + "-" + album.numero + "-" + album.titre;
         var titreBD = adaptertitreBD(titreBDAvantAdaptation);
 		//var tDispo = ExplDispo(idAlbumEnCours);
@@ -135,7 +141,7 @@
 
         // afficher la grande image 
 		var grandeImgBD = document.createElement("img");
-		grandeImgBD.setAttribute("src",showGrandeImage(title));
+		grandeImgBD.setAttribute("src",afficherGrandeImg(title));
 		grandeImgBD.setAttribute("alt",titreBD);
 		grandeImgBD.setAttribute("id", "currentBD");
 		grandeImgBD.setAttribute("class", "grdImgBD")
@@ -261,7 +267,7 @@
 		}
 
 		var btnRetour = creerBtns("Retour","previousBtn");
-		btnRetour.addEventListener("click", function()  {previous ();});
+		btnRetour.addEventListener("click", function()  {precedent ();});
 
 	}
 
@@ -273,7 +279,7 @@
 	function recupDetailsBD (BDalt, title) {
 		
 		var miniImgBD = document.createElement("img");
-		miniImgBD.setAttribute("src",showMiniAlbums(title));
+		miniImgBD.setAttribute("src",afficheMiniImg(title));
 		miniImgBD.setAttribute("alt",BDalt);
 		miniImgBD.setAttribute("id", "currentBD")
 		miniImgBD.setAttribute("class", "miniImageBD")
@@ -284,12 +290,13 @@
 	}
 	
 	/**
-	 * Crée le boutton retour 
+	 * Crée le boutton retour / emprunter
 	 */
 	function creerBtns(txt,idBtn) {
 		// boutton retour
 		var descriptBD = document.getElementById("descriptBD");
 		var divBtnTable = document.getElementById("divdirecttableDetailBD");
+		var divGBtnTable = document.getElementById("divglovtablebtndetail");
 		var divbtn = document.getElementById("btnsDiv");
 		var btn = document.createElement("button");
 		var t = document.createTextNode(txt);
@@ -297,6 +304,7 @@
 		btn.setAttribute("id", idBtn);
 		btn.setAttribute("class", "btnBD m-1");
 
+		divGBtnTable.appendChild(divBtnTable);
 		divBtnTable.appendChild(divbtn);
 		divbtn.appendChild(btn);
 		btn.appendChild(t);
@@ -312,7 +320,7 @@
 	/**
 	 * Supprime les éléments affichant le détail de la BD séléctionnées
 	 */
-	function deleteElmts() {
+	function supprimeElements() {
 		
 		var btnPrev = document.getElementById("previousBtn");
 		var imgPrev = document.getElementById("currentBD");
@@ -321,18 +329,18 @@
 		btnPrev.remove();
 		imgPrev.remove();
 		tableBDDetail.innerHTML = "";
-		if (roleUser === "gestionnaire") btnEmpPrev.remove();
-		
+		if (tempExmpl !== 0 && roleUser === "gestionnaire") btnEmpPrev.remove();
+		 
 	
 	}
 	/**
 	 * Permet le retour vers l'affichage de la liste globale des BD
 	 */
-	function previous() {
+	function precedent() {
 		miniBD.classList.remove("hide");
 		descriptBD.classList.add("hide");
 		barreRecherche.classList.remove("hide");
-		deleteElmts();
+		supprimeElements();
 	}
 
 	/**
@@ -345,10 +353,10 @@
 	}
 
 	/**
-		 * retourne le nombre d'exemplaire pour l'album selectionné
-		 * @param {number} idAlbumEnCours 
-		 * @returns 
-		 */
+	* retourne le nombre d'exemplaire pour l'album selectionné
+	* @param {number} idAlbumEnCours 
+	* @returns 
+	*/
 	function nbrExmplairesAlbum(idAlbum) {
 		let nombreExemplaires = 0;
 		exemplaires.forEach((exemplaire) => {

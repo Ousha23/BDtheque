@@ -1,16 +1,15 @@
 
-img .miniImageBD {
-    width: 100px;
-    height: 120px;
+.full {
+    width: 190px;
+    height: 250px;
 }
 
-img:hover {
+img .miniImageBD:hover {
     cursor: pointer;
+    -webkit-transform: scale(1.1);
 }
 
-.hide {
-    display: none;
-}
+
 
 .displayList {
     display: row;
@@ -38,10 +37,11 @@ img:hover {
 }
 
 .btnRecherche {
-    width: 100px;
-    font-size: 10px;
+    width: 150px;
+    font-size: 15px;
     margin-left: 10px;
-    height: 15px;
+    margin-top: 0;
+    height: 22px;
 }
 
 #formRecherche > div> div> input {
@@ -63,5 +63,6 @@ img:hover {
 
 .full:hover {
     -webkit-transform: scale(1.1);
+    cursor: pointer;
 }
 
