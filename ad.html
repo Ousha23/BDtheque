@@ -51,14 +51,9 @@
 
     <main class="containerMain">
       <section>
-        <a
-          id="emprunt"
-          href="gestion_emprunts.html?type=emprunt"
-          class="nav-link"
-          >Inscription de nouveaux membres</a
-        >
-        <a id="retour" href="gestion_retour.html?type=retour" class="nav-link"
-          >Mise à jour des informations des membres existants.
+        <a id="emprunt" href="ad.html" class="nav-link">Ajouter un adhérent</a>
+        <a id="retour" href="liste-adherents.html" class="nav-link"
+          >Liste de tous les adhérents
         </a>
       </section>
 
@@ -88,33 +83,34 @@
         <div id="resultatsRecherche"></div>
         <br /><br />
 
-        <p id="titreEnregistrer">Ajouter un adhérent :</p>
+        <!-- <p id="titreEnregistrer">Ajouter un adhérent :</p>-->
         <br /><br />
+
+        <div id="listePrets"></div>
+        <form id="adherentForm">
+          <label for="nom">Nom :</label>
+          <input type="text" id="nom" name="nom" required /><br /><br />
+
+          <label for="prenom">Prénom :</label>
+          <input type="text" id="prenom" name="prenom" required /><br /><br />
+
+          <label for="email">Email :</label>
+          <input type="email" id="email" name="email" required /><br /><br />
+
+          
+          <button id="bValider" type="submit">Ajouter</button>
+
+          <button id="bAnnuler" href="">Annuler</button>
+        </form>
         <p id="messageAjout" style="text-align: center"></p>
         <p id="messageModification" style="text-align: center"></p>
         <p id="messageSuppression" style="text-align: center"></p>
+        <div id="messageErreur" style="color: red;"></div>
         <div id="errorMessageContainer" style="text-align: center"></div>
-
-        <div id="listePrets"></div>
       </aside>
     </main>
 
     <h1>Ajout adhérents</h1>
-
-    <form id="adherentForm">
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required /><br /><br />
-
-      <label for="prenom">Prénom :</label>
-      <input type="text" id="prenom" name="prenom" required /><br /><br />
-
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required /><br /><br />
-
-      <button type="submit">Ajouter Adhérent</button>
-
-      <a href="liste-adherents.html">Liste de tous les adhérents</a>
-    </form>
 
     <p id="messageAjout"></p>
 
@@ -202,10 +198,13 @@
 
     <p id="messageSuppression"></p>
      <script src="js/adherents.js"></script>-->
-    <script src="js/ad.js"></script>
 
-    <script>
-      /*  this.adherents = new Map([
+  <!--    <script type="module" src="js/map.js"></script>
+   <script type="module" src="js/liste-adherents.js"></script> -->
+    <script src="js/liste-adherents.js"></script>
+
+    <!--  <script>
+     /*   this.adherents = new Map([
         [
           "001",
           {
@@ -590,6 +589,6 @@ function Adherent(nom, prenom, email) {
           }, 3000);
         }
       }*/
-    </script>
+    </script>-->
   </body>
 </html>
