@@ -15,63 +15,109 @@ function afficherAdherents() {
       <td class="col-2">${adherent.prenom}</td>
       <td class="col-2">${adherent.email}</td>
       <td class="col-2">
-        <button onclick="editerAdherent('${codeAdherent}')">Éditer</button>
-        <button onclick="supprimerAdherent('${codeAdherent}')">Supprimer</button>
+      <button id="bModifier-${codeAdherent}" class="bModifier" data-code="${codeAdherent}">Éditer</button>
+<button id="bSupprimer-${codeAdherent}" class="bSupprimer" data-code="${codeAdherent}">Supprimer</button>
+
       </td>
     `;
     tableIdElement.appendChild(tableRow);
   });
+
+  const editButtons = document.querySelectorAll('.bModifier');
+  const deleteButtons = document.querySelectorAll('.bSupprimer');
+
+  editButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const codeAdherent = this.getAttribute('data-code');
+      editerAdherent(codeAdherent);
+    });
+  });
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const codeAdherent = this.getAttribute('data-code');
+      supprimerAdherent(codeAdherent);
+    });
+  });
 }
+
+function editerAdherent(codeAdherent) {
+  const adherent = adherents.get(codeAdherent);
+
+  const form = document.createElement("form");
+  form.innerHTML = `
+    <input type="text" id="editNom-${codeAdherent}" value="${adherent.nom}">
+    <input type="text" id="editPrenom-${codeAdherent}" value="${adherent.prenom}">
+    <input type="text" id="editEmail-${codeAdherent}" value="${adherent.email}">
+    <button onclick="modifierAdherent('${codeAdherent}')">Enregistrer</button>
+  `;
+
+  const editButton = document.getElementById(`bModifier-${codeAdherent}`);
+  if (editButton) {
+    const tdElement = editButton.parentElement;
+    tdElement.appendChild(form);
+  } else {
+    console.error(`Le bouton d'édition avec l'ID bModifier-${codeAdherent} est introuvable dans le DOM.`);
+  }
+}
+
+
 
 // Fonction pour ajouter un adhérent à la Map
 function ajouterAdherent(nom, prenom, email) {
-   // Vérifie si l'email existe dans la Map des adhérents
-   let emailExiste = false;
+  // Vérifie si l'email existe dans la Map des adhérents
+  let emailExiste = false;
 
-   adherents.forEach(function (adherent) {
-     if (adherent.email === email) {
-       emailExiste = true;
-       return;
-     }
-   });
- 
-   if (emailExiste) {
-     alert("L'adresse email est déjà utilisée. Veuillez entrer une autre adresse email.");
-     return null;
-   }
+  adherents.forEach(function (adherent) {
+    if (adherent.email === email) {
+      emailExiste = true;
+      return;
+    }
+  });
 
-   function genererLogin(nom, prenom) {
+  if (emailExiste) {
+    alert(
+      "L'adresse email est déjà utilisée. Veuillez entrer une autre adresse email."
+    );
+    return null;
+  }
+
+  function genererLogin(nom, prenom) {
     // Convertir le prénom en majuscules et extraire les deux premières lettres
     const deuxPremieresLettresPrenom = prenom.substr(0, 2).toUpperCase();
-    
+
     // Supprimer les espaces et convertir le nom en minuscules
-    const nomSansEspaces = nom.toLowerCase().replace(/\s/g, '');
-    
+    const nomSansEspaces = nom.toLowerCase().replace(/\s/g, "");
+
     // Combiner le nom (en minuscules et sans espaces) avec les deux premières lettres du prénom (en majuscules)
     const login = `${nomSansEspaces}.${deuxPremieresLettresPrenom}`;
-  
+
     return login;
   }
-  
+
   function genererPass(nom, prenom) {
     return `${nom.toLowerCase()}${prenom.toLowerCase()}@!`;
   }
-  
 
- // Générer le login en utilisant la fonction genererLogin
- let login = genererLogin(nom, prenom);
+  // Générer le login en utilisant la fonction genererLogin
+  let login = genererLogin(nom, prenom);
+  console.log("Login généré :", login);
 
- let pass = genererPass(nom, prenom);
+  let pass = genererPass(nom, prenom);
+  console.log("Mot de passe généré :", pass);
 
- let nouvelAdherent = {
-  nom: nom,
-  prenom: prenom,
-  email: email,
-  dateAdhesion: new Date(),
-  login: login,
-  pass: pass
-};
-
+  let nouvelAdherent = {
+    nom: nom,
+    prenom: prenom,
+    email: email,
+    dateAdhesion: new Date(),
+    login: login,
+    pass: pass,
+  };
+  console.log(
+    "Date d'adhésion de nouvel adhérent :",
+    nouvelAdherent.dateAdhesion
+  );
   // Génère un code adhérent unique
   let codeAdherent = generateCodeAdherent();
 
@@ -94,38 +140,39 @@ form.addEventListener("submit", function (event) {
   const nom = document.getElementById("nom").value;
   const prenom = document.getElementById("prenom").value;
   const email = document.getElementById("email").value;
- 
   function validerNomPrenom(chaine) {
-  const estValideCasse = /^[A-Z][a-z]*$/.test(chaine);
-  const estValideLettres = /^[a-zA-Z]+$/.test(chaine);
-  const estValideChiffres = /^[0-9]+$/.test(chaine);
+    const estValideCasse = /^[A-Z][a-z\-]*$/.test(chaine); // Autoriser les tirets "-"
+    const estValideLettres = /^[a-zA-Z\-]+$/.test(chaine); // Autoriser les tirets "-"
+    const contientChiffre = /\d/.test(chaine);
 
-  return (estValideCasse && estValideLettres) || estValideChiffres;
-}
-
-const isNomValide = validerNomPrenom(nom);
-const isPrenomValide = validerNomPrenom(prenom);
-
-if (!isNomValide || !isPrenomValide) {
-  if (!isNomValide) {
-    if (/^[0-9]+$/.test(nom)) {
-      messageErreur.textContent = "Le nom ne peut contenir que des chiffres. Veuillez réessayer.";
-    } else {
-      messageErreur.textContent = "Le nom doit commencer par une majuscule suivie de lettres minuscules. Veuillez réessayer.";
-    }
+    return estValideCasse && estValideLettres && !contientChiffre;
   }
-  if (!isPrenomValide) {
-    if (/^[0-9]+$/.test(prenom)) {
-      messageErreur.textContent = "Le prénom ne peut contenir que des chiffres. Veuillez réessayer.";
-    } else {
-      messageErreur.textContent = "Le prénom doit commencer par une majuscule suivie de lettres minuscules. Veuillez réessayer.";
-    }
-  }
-  clearMessage(messageErreur);
-  return;
-}
 
-  
+  const isNomValide = validerNomPrenom(nom);
+  const isPrenomValide = validerNomPrenom(prenom);
+
+  if (!isNomValide || !isPrenomValide) {
+    if (!isNomValide) {
+      if (/^[0-9]+$/.test(nom)) {
+        messageErreur.textContent =
+          "Le nom ne peut pas contenir des chiffres. Veuillez réessayer.";
+      } else {
+        messageErreur.textContent =
+          "Le nom doit commencer par une majuscule suivie de lettres minuscules. Veuillez réessayer.";
+      }
+    }
+    if (!isPrenomValide) {
+      if (/^[0-9]+$/.test(prenom)) {
+        messageErreur.textContent =
+          "Le prénom ne peut pas contenir des chiffres. Veuillez réessayer.";
+      } else {
+        messageErreur.textContent =
+          "Le prénom doit commencer par une majuscule suivie de lettres minuscules. Veuillez réessayer.";
+      }
+    }
+    clearMessage(messageErreur);
+    return;
+  }
 
   const nouvelAdherent = ajouterAdherent(nom, prenom, email);
 
@@ -136,12 +183,34 @@ if (!isNomValide || !isPrenomValide) {
   }
 });
 
+function modifierAdherent(codeAdherent) {
+  const nom = document.getElementById("editNom").value;
+  const prenom = document.getElementById("editPrenom").value;
+  const email = document.getElementById("editEmail").value;
+  
+  const adherent = adherents.get(codeAdherent);
+  adherent.nom = nom;
+  adherent.prenom = prenom;
+  
+  if (adherents.has(codeAdherent)) {
+    const adh = adherents.get(codeAdherent);
+    adh.email = email; 
+  
+    adherents.set(codeAdherent, adh);
+  
+    console.log(`Nouvel email pour ${adh.nom} ${adh.prenom}: ${adh.email}`);
+  } else {
+    console.log("L'adhérent n'existe pas");
+  }
+}
+
+
+
 const lienRetour = document.getElementById("retour");
 const tableContainer = document.getElementById("tableContainer");
 const adherentForm = document.getElementById("adherentForm");
 
-
-lienRetour.addEventListener("click", function(event) {
+lienRetour.addEventListener("click", function (event) {
   event.preventDefault();
 
   // Afficher le tableau des adhérents
@@ -228,3 +297,7 @@ adherents.set("006", {
 
 // Appelle la fonction afficherAdherents pour afficher les adhérents existants
 afficherAdherents();
+
+
+
+  
