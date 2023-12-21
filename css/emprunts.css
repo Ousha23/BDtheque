@@ -215,6 +215,7 @@ section a {
   font-size: 1.2em;
   font-weight: bold;
 }
+
 #adherentForm {
   background-color: #f5f6f8;
   padding: 50px;
@@ -241,7 +242,34 @@ section a {
   padding: 10px;
 }
 
-#bValider {
+.editFormClass,.suppFormClass {
+  background-color: #f5f6f8;
+  padding: 50px;
+  border-radius: 25px;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #000;
+}
+
+.editFormClass input, .suppFormClass input {
+  border: 1px solid #000;
+  width: 30%;
+  height: 30px;
+  box-shadow: 0 0 2px 2px grey;
+  padding: 10px;
+}
+
+.editFormClass button, .suppFormClass button {
+  border: 1px solid #000;
+  width: 30%;
+  height: 40px;
+  box-shadow: 0 0 2px 2px grey;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#bValider,.sub {
   background-color: #ff6944;
   color: #fff;
   border-radius: 25px;

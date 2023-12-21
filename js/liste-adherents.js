@@ -13,52 +13,32 @@ function afficherAdherents() {
       <td class="col-2">${codeAdherent}</td>
       <td class="col-2">${adherent.nom}</td>
       <td class="col-2">${adherent.prenom}</td>
-      <td class="col-2">${adherent.email}</td>
+      <td  id="tomail" class="col-2 nouvelEmail">${adherent.email}</td>
       <td class="col-2">
       <button id="bModifier-${codeAdherent}" class="bModifier" data-code="${codeAdherent}">Éditer</button>
-<button id="bSupprimer-${codeAdherent}" class="bSupprimer" data-code="${codeAdherent}">Supprimer</button>
+      <button id="bSupprimer-${codeAdherent}" class="bSupprimer" data-code="${codeAdherent}">Supprimer</button>
 
       </td>
     `;
     tableIdElement.appendChild(tableRow);
   });
 
-  const editButtons = document.querySelectorAll('.bModifier');
-  const deleteButtons = document.querySelectorAll('.bSupprimer');
+  const editButtons = document.querySelectorAll(".bModifier");
+  const deleteButtons = document.querySelectorAll(".bSupprimer");
 
-  editButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const codeAdherent = this.getAttribute('data-code');
+  editButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const codeAdherent = this.getAttribute("data-code");
       editerAdherent(codeAdherent);
     });
   });
 
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const codeAdherent = this.getAttribute('data-code');
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const codeAdherent = this.getAttribute("data-code");
       supprimerAdherent(codeAdherent);
     });
   });
-}
-
-function editerAdherent(codeAdherent) {
-  const adherent = adherents.get(codeAdherent);
-
-  const form = document.createElement("form");
-  form.innerHTML = `
-    <input type="text" id="editNom-${codeAdherent}" value="${adherent.nom}">
-    <input type="text" id="editPrenom-${codeAdherent}" value="${adherent.prenom}">
-    <input type="text" id="editEmail-${codeAdherent}" value="${adherent.email}">
-    <button onclick="modifierAdherent('${codeAdherent}')">Enregistrer</button>
-  `;
-
-  const editButton = document.getElementById(`bModifier-${codeAdherent}`);
-  if (editButton) {
-    const tdElement = editButton.parentElement;
-    tdElement.appendChild(form);
-  } else {
-    console.error(`Le bouton d'édition avec l'ID bModifier-${codeAdherent} est introuvable dans le DOM.`);
-  }
 }
 
 
@@ -183,27 +163,6 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-function modifierAdherent(codeAdherent) {
-  const nom = document.getElementById("editNom").value;
-  const prenom = document.getElementById("editPrenom").value;
-  const email = document.getElementById("editEmail").value;
-  
-  const adherent = adherents.get(codeAdherent);
-  adherent.nom = nom;
-  adherent.prenom = prenom;
-  
-  if (adherents.has(codeAdherent)) {
-    const adh = adherents.get(codeAdherent);
-    adh.email = email; 
-  
-    adherents.set(codeAdherent, adh);
-  
-    console.log(`Nouvel email pour ${adh.nom} ${adh.prenom}: ${adh.email}`);
-  } else {
-    console.log("L'adhérent n'existe pas");
-  }
-}
-
 
 
 const lienRetour = document.getElementById("retour");
@@ -297,7 +256,3 @@ adherents.set("006", {
 
 // Appelle la fonction afficherAdherents pour afficher les adhérents existants
 afficherAdherents();
-
-
-
-  

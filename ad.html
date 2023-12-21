@@ -99,7 +99,8 @@
 
           
           <button id="bValider" type="submit">Ajouter</button>
-
+          <button id="modifierBtn-${codeAdherent}" type="submit"class="hidden">Enregistrer</button>
+          <button id="supprimerBtn-${codeAdherent}" type="submit"class="hidden">Supprimer</button>
           <button id="bAnnuler" href="">Annuler</button>
         </form>
         <p id="messageAjout" style="text-align: center"></p>
@@ -203,8 +204,9 @@
    <script type="module" src="js/liste-adherents.js"></script> -->
  
   <script src="js/liste-adherents.js"></script>
- <!--   <script src="js/modifier.js"></script> 
-   <script>
+ <script src="js/modifier.js"></script> 
+ <script src="js/supprimer.js"></script> 
+   <!--   <script>
      /*   this.adherents = new Map([
         [
           "001",
