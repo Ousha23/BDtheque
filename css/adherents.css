@@ -6,8 +6,15 @@
   display: none;
 }
 
+.aj{
+  text-align: center;
+}
+
 #tableContainer {
   width: 100%;
+  height: auto;
+  min-width: 320px;
+  padding: 20px;
   margin-top: 20px;
 }
 
@@ -25,7 +32,7 @@
 }
 
 #listePers th {
-  background-color: #343a40;
+  background-color: #ff6944;;
   color: #ffffff;
 }
 
@@ -43,3 +50,21 @@
 }
 
 /* Ajoutez d'autres styles au besoin */
+@media screen and (max-width:625px) {
+  #tableContainer button {
+    margin-bottom: 8%;
+}
+}
+
+
+@media screen and (max-width:450px) {
+#adherentForm {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  margin: auto;
+}
+label{
+  margin-bottom: 3%;
+}
+}
