@@ -92,7 +92,7 @@ function creerNavGestionnaire(){
     gestMmbreDiv.setAttribute("id","gestMmbreLien");
     var gestMmbreTxt = document.createTextNode("Gestion des membres"); // Création du nœud texte
     var gestMmbreLink = document.createElement("a");
-    gestMmbreLink.setAttribute("href", "construction.html");
+    gestMmbreLink.setAttribute("href", "gestion-adherents.html");
     gestMmbreLink.setAttribute("class", "aLinkMenu");
     gestMmbreLink.appendChild(gestMmbreTxt); 
     gestMmbreDiv.appendChild(gestMmbreLink); 
