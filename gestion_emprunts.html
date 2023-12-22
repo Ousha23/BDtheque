@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./CSS/empruntsRetours.css">
 </head>
-<body>
+
     <header class="sticky-top w-100" id="headerGlobal">
         <nav>
             <div class="menuFixe justify-content-between row">
-                <a class="navbar-brand col-4" href="index.html">
-                    <img class="col-8 col-md-6 col-lg-5" src="ressources/img/logo.png" alt="logo BDthèque">
+                <a id="logo" class="navbar-brand col-4" href="index.html"> 
+                    <img class="col-8 col-md-6 col-lg-5" src="./images/logo.png" alt="logo BDthèque">Marmusots
                 </a>
                 <div class="form-inline col-4 col-sm-3 col-md-2 mt-2 connexionLink">
                     <div class="input-group" id="menuConnexionCompte">
@@ -44,12 +44,13 @@
             
             </div>
         </nav>
-    </header><br>
+    </header>
  
+<body class="emprunts-retours-body"></body>
 
     <main class="containerMain"> 
 
-        <section id="maSection">
+        <section >
 
             <a id="emprunt" href="gestion_emprunts.html?type=emprunt" class="nav-link">Enregistrer un prêt</a>
             <a  id="retour" href="gestion_retour.html?type=retour" class="nav-link">Enregistrer un retour</a>
