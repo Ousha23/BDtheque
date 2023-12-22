@@ -1,6 +1,21 @@
 // Initialisation de la Map adherents
 let adherents = new Map();
 
+window.addEventListener('DOMContentLoaded', (event) => {
+  // Vérifie s'il existe déjà des adhérents dans le localStorage
+  const adherentsFromStorage = localStorage.getItem('adherents');
+  if (adherentsFromStorage) {
+    // Si des adhérents sont trouvés dans le localStorage, les charger dans la Map `adherents`
+    adherents = new Map(JSON.parse(adherentsFromStorage));
+  } else {
+    // Si aucun adhérent n'est trouvé dans le localStorage, utiliser les adhérents initiaux définis précédemment
+    // (ce bloc de code avec les adhérents initiaux que vous avez déjà définis)
+  }
+
+  // Ensuite, appeler la fonction pour afficher les adhérents
+  afficherAdherents();
+});
+
 // Fonction pour afficher les adhérents existants
 function afficherAdherents() {
   const tableIdElement = document.getElementById("tableId");
@@ -94,6 +109,7 @@ function ajouterAdherent(nom, prenom, email) {
     login: login,
     pass: pass,
   };
+
   console.log(
     "Date d'adhésion de nouvel adhérent :",
     nouvelAdherent.dateAdhesion
@@ -103,9 +119,15 @@ function ajouterAdherent(nom, prenom, email) {
 
   adherents.set(codeAdherent, nouvelAdherent);
 
+
+ 
+  // Mettre à jour le localStorage avec les adhérents mis à jour
+ localStorage.setItem('adherents', JSON.stringify(Array.from(adherents.entries())));
+
+
   // Met à jour l'affichage
   afficherAdherents();
-
+ 
   return nouvelAdherent;
 }
 
@@ -120,6 +142,9 @@ form.addEventListener("submit", function (event) {
   const nom = document.getElementById("nom").value;
   const prenom = document.getElementById("prenom").value;
   const email = document.getElementById("email").value;
+ 
+ 
+ 
   function validerNomPrenom(chaine) {
     const estValideCasse = /^[A-Z][a-z\-]*$/.test(chaine); // Autoriser les tirets "-"
     const estValideLettres = /^[a-zA-Z\-]+$/.test(chaine); // Autoriser les tirets "-"
