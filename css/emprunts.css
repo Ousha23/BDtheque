@@ -40,7 +40,7 @@ section a {
 }
 
 /* Style pour les liens actifs (en orange) */
-.nav-link.active {
+ section .nav-link.active {
   color: orange;
 }
 

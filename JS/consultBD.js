@@ -373,7 +373,7 @@
 	 * Redirection vers la page de l'emprunt avec envoie de l'id en paramêtre
 	 */
 	function redirectEmprunt(idAlbumActuel) {
-		document.location.href="construction.html?albumid="+idAlbumActuel;
+		document.location.href="gestion_emprunts.html?albumid="+idAlbumActuel;
 	}
 
 
