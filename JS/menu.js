@@ -246,6 +246,9 @@ function creerNavResp(){
  * Supprime les données du localStorage et raffraichi la page
  */
 function deconnexion () {
-    localStorage.clear();
+    localStorage.removeItem("idUser");
+    localStorage.removeItem("login");
+    localStorage.removeItem("typeUser");
+    localStorage.removeItem("role");
     document.location.href = "index.html";
 }

@@ -263,10 +263,12 @@
 		
 		if (nbExempEnCours !== 0  && roleUser === "gestionnaire"){
 			var btnEmprunt = creerBtns("Emprunter","empruntBtnID");
+			btnEmprunt.classList.add("btnClasse");
 			btnEmprunt.addEventListener("click", function() {redirectEmprunt(idAlbumEnCours);});
 		}
 
 		var btnRetour = creerBtns("Retour","previousBtn");
+		btnRetour.classList.add("btnClasse");
 		btnRetour.addEventListener("click", function()  {precedent ();});
 
 	}

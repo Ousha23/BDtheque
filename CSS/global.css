@@ -2,9 +2,9 @@
     box-sizing: border-box;
 }
 
-button {
+.btnClasse {
     background-color: #ff6944;
-    border: white;
+    border: #ffffff;
     color: white;
     border-radius: 15px;
     height: 25px;
@@ -108,4 +108,8 @@ textarea:focus, input:not([type=checkbox]):not([type=radio]):focus, .uneditable-
   border-color: #ff6944;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #ff6944;
   outline: 0 none;
+
+}
+input {
+    max-height: 30px;
 }
