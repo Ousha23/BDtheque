@@ -1,0 +1,421 @@
+/* 
+body {
+    min-width: 360px;
+}
+
+ 
+ /* .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    
+  }
+ .logo a {
+  text-decoration: none;
+  color: #FF6944;
+  align-items: center;
+  margin-top: 30px;
+  font-size: 20px;
+  } */
+
+
+  header #monCompte {
+
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    margin-right: 20px;
+    margin-top: 25px;
+ }
+ */
+
+
+main {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-width: 320px;
+    padding: 20px;
+}
+
+aside {
+    float: right;
+    width: 65%;
+    text-align: justify;
+    padding: 40px;
+    margin-top: 20px;
+    margin: auto;
+
+    
+}
+
+
+section  {
+  
+    float: left;
+    padding-top: 10px;
+    width: 26%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+   
+    border-right: 1px solid #808080; 
+    
+}
+section  a {
+    display: block;
+    text-align:left;
+    margin-top: 30px;
+    text-decoration: none;
+    font-size: 1.4em;
+  
+    
+}
+
+
+
+
+.fas.fa-info-circle {
+    color: #FF6944;
+}
+
+/* Style de la bordure des cellules */
+.table-bordure {
+    border: 1px solid #000; 
+   text-align: center;
+}
+
+.table-bordure th, .table-bordure td {
+    border: 1px solid #000; 
+}
+
+
+
+/* Styles pour les cellules de l'en-tête */
+.header-cell {
+    width: 150px;
+}
+
+/* Styles pour les cellules de données */
+.table-bordure td {
+    width: 150px; 
+}
+
+
+#listePrets table tr td:nth-child(2) {
+    color: #FF6944;
+}
+
+#listePrets table tr:nth-child(1) {
+    background-color: #e6e6e6
+    ; /* Couleur d'arrière-plan pour la deuxième ligne */
+}
+#listePrets table tr:nth-child(3) {
+    background-color: #F5F6F8; /* Couleur d'arrière-plan pour la deuxième ligne */
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center; 
+}
+
+.input-container input {
+    margin-right: 10px; 
+    border: 1px solid #000; 
+    width: 30%;
+    height: 30px;
+    padding: 10px;
+    box-shadow: 0 0 2px 2px grey;
+}
+
+.input-container button{
+
+    background-color: #FF6944;
+    color: #fff;
+    border-radius: 25px;
+    width: auto;
+    min-width: 20%;
+    max-width: 30%;
+    height: 40px;
+   font-weight: bold;
+    font-size: 1.1em;
+    border: 2px solid #FF6944; 
+   
+}
+#resultatsRecherche {
+    padding-bottom: 20px;
+border-bottom:1px solid #FF6944;  
+
+}
+#rechercheAdherentForm label{
+
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#titreEnregistrer{
+    font-size: 1.2em;
+    font-weight: bold;
+
+}
+#empruntForm {
+   
+    background-color: #F5F6F8;
+    padding: 50px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid #000; 
+    
+}
+#titreEnregistrer{
+    font-size: 1.2em;
+    font-weight: bold;
+
+}
+
+
+
+#empruntForm{
+    background-color: #F5F6F8;
+    padding: 50px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid #000; 
+    text-align: center;
+    
+}
+#empruntForm div{
+
+    display: flex;
+    justify-content: space-around;
+
+}
+
+#empruntForm input {
+    border: 1px solid #000; 
+    width: 30%;
+    height: 30px;
+    box-shadow: 0 0 2px 2px grey;
+    padding: 10px;
+}
+
+#etatBD{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+#etatBD #motif{
+   
+    border: 1px solid #000;
+    width: 30%;
+    height: 35px;
+    box-shadow: 0 0 2px 2px grey;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#empruntDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    margin-right: 10px;
+    text-align: left;
+    min-width: 30%; /* Adjust the width based on your needs */
+}
+
+.form-row input {
+    flex: 0 0 40%; 
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    height: 30px;
+    box-shadow: 0 0 2px 2px grey;
+    font-size: 16px;
+   
+}
+
+/* Style pour les boutons radio */
+.radio-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+#form-row2 #titre {
+    text-align: left;
+    margin-right: 120px;
+    min-width: 40%;
+}
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Style pour les boutons radio sélectionnés */
+#form-row2 .radio-buttons input:checked {
+    background-color: orange;
+    color: white;
+}
+/* Nouvelle règle pour les boutons radio sans ombre portée */
+#form-row2 input {
+    box-shadow: none; /* Supprime l'ombre portée */
+    border: none;
+}
+/*#etatRetour {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box; 
+}
+
+label, #etatRetour {
+    display: block;
+    margin-bottom: 10px;
+}*/
+
+#bValider {
+    background-color: #FF6944;
+    color: #fff;
+    border-radius: 25px;
+    width: auto;
+    min-width: 20%;
+
+    height: 40px;
+    font-weight: bold;
+    font-size: 1em;
+    border: 2px solid #FF6944; 
+   
+}
+
+#bAnnuler {
+    background-color: #fff;
+    color: #FF6944;
+    border-radius: 25px;
+    width: auto;
+    min-width: 20%;
+
+    height: 40px;
+    font-weight: bold;
+    font-size: 1em;
+    border: 2px solid #FF6944; 
+}
+#validerRetour {
+    background-color: #FF6944;
+    color: #fff;
+    border-radius: 25px;
+    width: auto;
+    min-width: 20%;
+
+    height: 40px;
+    font-weight: bold;
+    font-size: 1em;
+    border: 2px solid #FF6944; 
+   
+}
+
+
+@media screen and (min-width: 350px) and (max-width: 830px){
+  
+    main {
+
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+       
+    }
+    section {
+        border-bottom: 1px solid #808080; 
+        width: 100%;
+        border-right: 0px; 
+        padding-top: 0%;
+       
+        
+    }
+    section a {
+       
+        margin-top: 0%;
+       display: block;
+       text-align: center;
+        
+    }
+
+    aside {
+
+        width: 100%;
+       
+
+    }
+    .input-container input {
+       width: 50%;
+    }
+    .input-container button {
+        width: auto;
+    min-width: 30%;
+    
+       
+     }
+
+     
+
+     #bValider {
+        width: auto;
+    min-width: 40%;
+   
+     }
+
+     #validerRetour{
+        width: auto;
+    min-width: 40%;
+   
+     }
+
+     #bAnnuler {
+        width: auto;
+    min-width: 40%;
+   
+     }
+
+     #codeExemplaire {
+        margin-left: 25px;
+    }
+  
+
+}
+
+    .custom-alert-class {
+        width: 400px; 
+        font-size: 16px; 
+        background-color: #F5F6F8;
+       text-decoration: none;
+    }
+
+   
+  
+    .customClass-link {
+        color: black; /* Remplacez "yourColor" par la couleur de votre choix */
+        text-decoration: underline; /* Ou ajoutez d'autres styles de lien selon vos préférences */
+    }
+
+   
