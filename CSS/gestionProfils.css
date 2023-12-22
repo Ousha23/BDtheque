@@ -1,0 +1,55 @@
+#formAjoutEmp {
+    background-color:#e6e6e6 ;
+    border: 1px solid #A9A9A9;
+    border-radius: 10px;
+}
+
+#lienAjoutEmp, #lienListeEmp {
+    text-decoration:solid;
+    font-size: 18px;
+    color: black;
+}  
+
+#lienAjoutEmp:hover, #lienListeEmp:hover{
+    color: #ff6944;
+    font-weight: bold;
+    cursor:default;
+}
+
+ #asideLiens {
+    border-right: 1px solid #A9A9A9;
+}
+
+main {
+    margin-left: 0;
+}
+
+#msgErrGestionEmp {
+    color: #ff6944;
+    font-family: 'Roboto';
+    border-radius: 10px;
+    background-color: #e6e6e6; 
+    border: #A9A9A9 solid 1px;
+    margin: 30px; 
+    text-align: center; 
+}
+
+.h1 {
+    color: #ff6944;
+}
+.tdActionEmp
+
+#btnModifierEmp, #btnSupprimerEmp {
+    border-radius: 10px;
+    margin: 5px;
+}
+
+
+@media screen and (min-width: 350px) and (max-width: 830px){ 
+    #asideLiens {
+        border-right:none;
+    }
+    #divEnsemble {
+        height: 25%;
+    }
+}

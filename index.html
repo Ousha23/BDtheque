@@ -20,17 +20,9 @@
 <body>
     
     <header class="sticky-top" id="headerGlobal">
-        <div>
-            <!-- <div class="col-12 alert alert-danger d-block d-sm-none text-center" role="alert">Screen X-Small</div>
-            <div class="col-sm-12 alert alert-info d-none d-sm-block d-md-none text-center" role="alert">Screen Small</div>
-            <div class="col-md-12 alert alert-success d-none d-md-block d-lg-none text-center" role="alert">Screen Medium</div>
-            <div class="col-lg-12 alert alert-warning d-none d-lg-block d-xl-none text-center" role="alert">Screen Large</div>
-            <div class="col-xl-12 alert alert-dark d-none d-xl-block d-xxl-none text-center" role="alert">Screen X-Large</div>
-            <div class="col-xxl-12 alert alert-secondary d-none d-xxl-block text-center" role="alert">Screen XX-Large</div> -->
-        </div>
         <nav>
             <div class="menuFixe justify-content-between row">
-                <a class="navbar-brand col-4" href="consultBD.html">
+                <a class="navbar-brand col-4" href="index.html">
                     <img class="col-8 col-md-6 col-lg-5" src="ressources/img/logo.png" alt="logo BDthèque">
                 </a>
                 <div class="form-inline col-4 col-sm-3 col-md-2 mt-2 connexionLink">
@@ -41,7 +33,7 @@
                             <a id="connexionLink">connexion</a>
                             <div class="list-grou positionBurger hide" id="menuCompte">
                                 <a href="construction.html" class="list-group-item">Mon Compte</a>
-                                <a href="" id="lienDeconnexion" class="list-group-item">Deconnexion</a>
+                                <a id="lienDeconnexion" class="list-group-item">Deconnexion</a>
                             </div>
                     </div>
                 </div> 
@@ -53,48 +45,42 @@
         </nav>
     </header>
     <main>
+        <!-- Formulaire de recherche -->
         <section class="secFormRecherche">
             <div class="divFormRecherche">
                 <div class="row formRecherche" id="formRecherche">
-                    <div class="col-12 col-md-8">
-                        <input type="text" placeholder="Série" class="h-75 col-2" id="idInputSerie">
-                        <input type="text" placeholder="Auteur" class="h-75 col-2" id="idInputAuteur">
-                        <input type="text" placeholder="Titre" class="h-75 col-2" id="idInputTitre">
-                        <button class="btnRecherche col-3" id="btnRecherche">Rechercher</button>
+                    <div class="col-12 col-md-7 d-sm-flex align-items-center text-center text-sm-start">
+                        <input type="text" placeholder="Série" class=" col-12 col-sm-2 m-1" id="idInputSerie">
+                        <input type="text" placeholder="Auteur" class=" col-12 col-sm-2 m-1" id="idInputAuteur">
+                        <input type="text" placeholder="Titre" class=" col-12 col-sm-2 m-1" id="idInputTitre">
+                        <button class="btnRecherche col-4 col-sm-3  align-self-center btnClasse" id="btnRecherche">Rechercher</button>
                     </div>
-                    <div class="col-12 col-md-4">
-                            <label for="rechercheMotCle" class="col-6">Recherche par mot clé</label>
-                            <input type="text" id="rechercheMotCle" class="h-75 col-4">
+                    <div class="col-12 col-md-5 align-items-center text-center text-sm-end">
+                            <label for="rechercheMotCle" class="col-6 col-sm-7">Recherche par mot clé</label>
+                            <input type="text" id="rechercheMotCle" class="col-6 m-1 col-sm-4">
                     </div>
                 </div>
             </div>
-            
         </section>
+        <!-- liste des BD -->
         <section class="col-12 text-center">
             <div id="listeBD" class="row p-4 m-4 mb-5">    
             </div>
         </section>
-        
-        <section id="descriptBD" class="hide row addMarge text-center">
-            
-            <table id="tBD" class="table table-hover col-12">
-                <thead class="thead">
-                    <tr>
-                        <th scope="col" class="col-2">Série</th>
-                        <th scope="col" class="col-2">Album N°</th>
-                        <th scope="col" class="col-2">Titre</th>
-                        <th scope="col" class="col-2">Auteur</th>
-                        <th scope="col" class="col-2">Exemplaires Disponibles</th>
-                    </tr>
-                </thead>
-                <tbody id="tDetailBD">
-
-                </tbody>
-            </table>
-            <div id="grdImgBD" class="col-12 col-md-7">
+        <!-- Détail de la BD séléctionnée -->
+        <section id="descriptBD" class="hide row addMarge text-center d-flex">
+            <div id="grdImgBD" class="col-12 col-md-6 h-100">
             </div>
-            <div id="btnsDiv" class="col-12 col-md-3 m-2">
-
+        
+            <div class="col-12 col-md-6 mt-2 d-flex flex-column" id="divglovtablebtndetail">
+                <div class="col-12" id="divdirecttableDetailBD">
+                    <table class="col-12" id="tableDetailBD">
+                    </table>
+        
+                    <div id="btnsDiv" class="col-12 m-2">
+ 
+                    </div>
+                </div>
             </div>
         </section>
     </main>
