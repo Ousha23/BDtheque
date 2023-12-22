@@ -57,15 +57,15 @@ body {
     font-size: 1.4em;
 }
 
-#maingestionprofil .nav-link {
+.emprunts-retours-body .nav-link {
     text-decoration: none;
     color: black; /* Couleur par défaut (noir) */
 }
 
 /* Style pour les liens actifs (en orange) */
-#maingestionprofil .nav-link.active {
+.emprunts-retours-body .nav-link.active {
     color: #FF6944;
-    
+
 }
 
 .fas.fa-info-circle {
