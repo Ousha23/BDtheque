@@ -132,8 +132,7 @@ function verifConfPwd() {
     if (inputConfPwdEmp.value !== inputPwdEmp.value){
         msgErrGestionEmp.innerText = "Le mot de passe ne correspond pas. Merci de le ressaisir!";
         return false
-    } 
-    
+    }
 }
 /**
  * Contrôle le login (nombre de caractère minimal)
@@ -305,20 +304,33 @@ function construireTableEmp(){
  * @param {string} id 
  */
 function supprimerEmp (id) {
-    employesStorage.delete(id);
-    Swal.fire({
-        title: "Êtes-vous sûr?",
-        text: "Cette employé sera définitivement supprimé!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#ff6944",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Confirmer",
-        cancelButtonText: "Annuler",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            localStorage.setItem("employes", JSON.stringify(Array.from(employesStorage.entries())));
-            location.reload();
-        }
-    });
+    var emplAsupp = employesStorage.get(id);
+    if (emplAsupp.role !== "admin") {
+        employesStorage.delete(id);
+        Swal.fire({
+            title: "Êtes-vous sûr?",
+            text: "Cet employé "+ emplAsupp.role + " sera définitivement supprimé!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ff6944",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Annuler",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.setItem("employes", JSON.stringify(Array.from(employesStorage.entries())));
+                location.reload();
+            }
+        });
+    } else {
+        Swal.fire({
+            title: "Vous ne pouvez pas supprimer un "+emplAsupp.role+" !",
+            icon: "warning",
+            iconColor: '#FF6944', 
+            confirmButtonColor: '#FF6944',
+            customClass: {
+            popup: 'custom-alert-class'
+            }
+        });
+    }
 }
