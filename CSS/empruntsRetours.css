@@ -46,7 +46,7 @@ body {
     display: flex;
     flex-direction: column;
    
-    border-right: 1px solid #A9A9A9; 
+    border-right: 1px solid #808080; 
     
 }
 .emprunts-retours-body section  a {
@@ -57,13 +57,13 @@ body {
     font-size: 1.4em;
 }
 
-#maingestionprofil .nav-link {
+.emprunts-retours-body .nav-link {
     text-decoration: none;
     color: black; /* Couleur par défaut (noir) */
 }
 
 /* Style pour les liens actifs (en orange) */
-#maingestionprofil .nav-link.active {
+.emprunts-retours-body .nav-link.active {
     color: #FF6944;
     
 }
