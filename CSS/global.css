@@ -2,6 +2,22 @@
     box-sizing: border-box;
 }
 
+ 
+#logo {
+   
+    color: #FF6944;
+
+    
+  }
+
+  #logo img {
+    font-weight: normal;
+   width: 80px;
+    
+  }
+
+
+
 .btnClasse {
     background-color: #ff6944;
     border: #ffffff;
