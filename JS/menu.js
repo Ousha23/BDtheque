@@ -125,7 +125,7 @@ function creerNavGestionnaire(){
     gestEmpruntDiv.setAttribute("id", "gestEmpruntLien");
     var gestEmpruntTxt = document.createTextNode("Gestion des Emprunts"); // Création du nœud texte
     var gestEmpruntLink = document.createElement("a");
-    gestEmpruntLink.setAttribute("href", "construction.html");
+    gestEmpruntLink.setAttribute("href", "gestion_emprunts.html");
     gestEmpruntLink.setAttribute("class", "aLinkMenu");
     gestEmpruntLink.appendChild(gestEmpruntTxt); 
     gestEmpruntDiv.appendChild(gestEmpruntLink); 
