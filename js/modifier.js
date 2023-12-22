@@ -260,7 +260,7 @@ function editerAdherent(codeAdherent) {
       document.querySelector(`.prenomModifier`).value = "";
       document.querySelector(`.nouvelEmail`).value = "";
       // Masquer le formulaire après modification
-      //editForm.style.display = "none";
+      editForm.style.display = "none";
     });
 
     const adherentForm = document.getElementById("adherentForm");

@@ -14,7 +14,7 @@ function masquerFormulaire(containerId) {
   const container = document.getElementById(containerId);
   if (container) {
     setTimeout(() => {
-      container.innerHTML = '';
+      container.innerHTML = "";
     }, 4000);
   } else {
     console.error("Container du formulaire non trouvé dans le DOM.");
@@ -68,8 +68,9 @@ function supprimerAdherent(codeAdherent) {
       <p>Voulez-vous vraiment supprimer l'adhérent ${adherent.nom} ${adherent.prenom} ?</p>
       <button id="confirmDeleteBtn-${codeAdherent}" class="delete">Confirmer</button>
       <button id="cancelDeleteBtn-${codeAdherent}" class="cancel">Annuler</button>
-    `;}
-    
+    `;
+  }
+
   if (!adherent) {
     const messageErreur = document.getElementById("messageErreur");
     messageErreur.textContent =

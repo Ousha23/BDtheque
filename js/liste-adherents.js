@@ -1,6 +1,7 @@
 // Initialisation de la Map adherents
 let adherents = new Map();
 
+
 window.addEventListener('DOMContentLoaded', (event) => {
   // Vérifie s'il existe déjà des adhérents dans le localStorage
   const adherentsFromStorage = localStorage.getItem('adherents');
