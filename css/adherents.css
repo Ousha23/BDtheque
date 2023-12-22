@@ -45,7 +45,8 @@
 }
 
 #listePers tbody tr:hover {
-  background-color: gray;
+  background-color: #ff6944;
+  color: #ffffff;
 }
 
 #tableContainer button {

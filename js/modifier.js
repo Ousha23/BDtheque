@@ -68,7 +68,18 @@
   }
 */
 
-// modifications.js
+function sauvegarderAdherentDansLocalStorage(codeAdherent, nom, prenom, email) {
+  let adherentsLocalStorage = localStorage.getItem("adherents");
+  let adherents = {};
+
+  if (adherentsLocalStorage) {
+    adherents = JSON.parse(adherentsLocalStorage);
+  }
+
+  adherents[codeAdherent] = { nom, prenom, email };
+
+  localStorage.setItem("adherents", JSON.stringify(adherents));
+}
 
 function editerAdherent(codeAdherent) {
   const adherent = adherents.get(codeAdherent);
@@ -109,61 +120,72 @@ function editerAdherent(codeAdherent) {
       <label for="editEmail-${codeAdherent}">Email :</label>
       <input type="text" id="editEmail-${codeAdherent}" value="${adherent.email}" class="nouvelEmail" required><br><br>
 
-      <button id="modifierBtn-${codeAdherent}" type="submit">Enregistrer</button>
+      <button id="modifierBtn-${codeAdherent}" type="submit" class="mod">Modifier</button>
     `;
 
-    
     function mettreAJourLigneAdherent(codeAdherent, nom, prenom, email) {
       // Sélectionne l'élément du bouton Éditer en utilisant l'attribut data-code
-      const elementBModifier = document.querySelector(`[data-code="${codeAdherent}"]`);
-    
+      const elementBModifier = document.querySelector(
+        `[data-code="${codeAdherent}"]`
+      );
+
       function emailExists(email) {
-        return Array.from(adherents.values()).some((adherent) => adherent.email === email);
+        return Array.from(adherents.values()).some(
+          (adherent) => adherent.email === email
+        );
       }
-      
+
       // Vérifie si l'élément du bouton Éditer a été trouvé
       if (elementBModifier) {
         // Trouve la ligne (élément tr) la plus proche à partir du bouton Éditer
         const tableRow = elementBModifier.closest("tr");
-    
+
         // Vérifie si la ligne a été trouvée
         if (tableRow) {
           // Vérifie si l'adresse e-mail existante a été modifiée
           const emailExistante = tableRow.querySelector("#tomail").textContent;
-    
+
           if (emailExistante !== email) {
             // Vérifie si la nouvelle adresse e-mail est déjà utilisée par un autre adhérent
             if (emailExists(email)) {
               const messageErreur = document.getElementById("messageErreur");
-              messageErreur.textContent = "L'adresse email est déjà utilisée par un autre adhérent. Veuillez entrer une autre adresse email.";
+              messageErreur.textContent =
+                "L'adresse email est déjà utilisée par un autre adhérent. Veuillez entrer une autre adresse email.";
               clearMessage(messageErreur);
               return;
             }
           }
-    
- // Met à jour le contenu des cellules de la ligne avec les nouvelles valeurs
-// Met à jour le contenu des cellules de la ligne avec les nouvelles valeurs
-tableRow.children[0].textContent = codeAdherent;
-tableRow.children[1].textContent = nom;
-tableRow.children[2].textContent = prenom;
-tableRow.children[3].textContent = email;
-       
+
+          // Met à jour le contenu des cellules de la ligne avec les nouvelles valeurs
+          // Met à jour le contenu des cellules de la ligne avec les nouvelles valeurs
+          tableRow.children[0].textContent = codeAdherent;
+          tableRow.children[1].textContent = nom;
+          tableRow.children[2].textContent = prenom;
+          tableRow.children[3].textContent = email;
+          // Mettre à jour les adhérents dans le localStorage
+          const adherentsLocalStorage = localStorage.getItem("adherents");
+          let adherents = new Map();
+
+          if (adherentsLocalStorage) {
+            adherents = new Map(JSON.parse(adherentsLocalStorage));
+          }
+
+          adherents.set(codeAdherent, { nom, prenom, email });
+
+          localStorage.setItem("adherents", JSON.stringify([...adherents]));
+          form.reset();
         } else {
           // Affiche une erreur si la ligne n'est pas trouvée
           console.error(
             `L'élément avec data-code "${codeAdherent}" n'est pas à l'intérieur d'une balise <tr>.`
           );
         }
-     
-        form.reset();
-       } else {
+      } else {
         // Affiche une erreur si l'élément du bouton Éditer n'est pas trouvé
         console.error(`Élément avec data-code "${codeAdherent}" non trouvé.`);
       }
     }
-    
-    
-    
+
     // Ajoutez un gestionnaire d'événements 'submit' au formulaire créé
     form.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le comportement par défaut du formulaire
@@ -175,18 +197,28 @@ tableRow.children[3].textContent = email;
       const email = document.querySelector(`.nouvelEmail`).value;
       const messageErreur = document.getElementById("messageErreur");
 
-
+      if (
+        nom === adherent.nom &&
+        prenom === adherent.prenom &&
+        email === adherent.email
+      ) {
+        const messageErreur = document.getElementById("messageErreur");
+        messageErreur.textContent =
+          "Veuillez modifier les informations pour effectuer la mise à jour.";
+        clearMessage(messageErreur);
+        return;
+      }
       function validerNomPrenom(chaine) {
         const estValideCasse = /^[A-Z][a-z\-]*$/.test(chaine); // Autoriser les tirets "-"
         const estValideLettres = /^[a-zA-Z\-]+$/.test(chaine); // Autoriser les tirets "-"
         const contientChiffre = /\d/.test(chaine);
-    
+
         return estValideCasse && estValideLettres && !contientChiffre;
       }
-    
+
       const isNomValide = validerNomPrenom(nom);
       const isPrenomValide = validerNomPrenom(prenom);
-    
+
       if (!isNomValide || !isPrenomValide) {
         if (!isNomValide) {
           if (/^[0-9]+$/.test(nom)) {
@@ -213,6 +245,9 @@ tableRow.children[3].textContent = email;
       // Mettre à jour la ligne correspondante dans le tableau
       mettreAJourLigneAdherent(codeAdherent, prenom, email);
 
+      // Sauvegarder les données mises à jour dans le localStorage
+      sauvegarderAdherentDansLocalStorage(codeAdherent, nom, prenom, email);
+
       // Afficher la notification
       const messageModification = document.getElementById(
         "messageModification"
@@ -220,6 +255,10 @@ tableRow.children[3].textContent = email;
       messageModification.textContent = `L'adhérent ${adherent.nom} ${adherent.prenom} a été modifié.`;
       clearMessage(messageModification);
 
+      document.querySelector(`.idModifier`).value = "";
+      document.querySelector(`.nomModifier`).value = "";
+      document.querySelector(`.prenomModifier`).value = "";
+      document.querySelector(`.nouvelEmail`).value = "";
       // Masquer le formulaire après modification
       //editForm.style.display = "none";
     });
@@ -238,67 +277,3 @@ tableRow.children[3].textContent = email;
     }, 5000);
   }
 }
-
-/*
-// Sélection de l'élément bouton
-const modifierBtn = document.getElementById('modifierBtn');
-
-// Ajout d'un gestionnaire d'événements 'click'
-modifierBtn.addEventListener('click', function() {
-  /* votre code pour obtenir le code adhérent 
-    // Récupérer les valeurs des champs du formulaire
-    const nom = document.querySelector(`.nomModifier`).value;
-    const prenom = document.querySelector(`.prenomModifier`).value;
-    const email = document.querySelector(`.nouvelEmail`).value;
-
-  const adherent = adherents.get(codeAdherent);
-  adherent.nom = nom;
-  adherent.prenom = prenom;
-
-  if (adherents.has(codeAdherent)) {
-    const adh = adherents.get(codeAdherent);
-    adh.email = email;
-
-    adherents.set(codeAdherent, adh);
-
-    console.log(`Nouvel email pour ${adh.nom} ${adh.prenom}: ${adh.email}`);
-  } else {
-    console.log("L'adhérent n'existe pas");
-  }
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Récupérer le bouton "Enregistrer"
-  const modifierBtn = document.getElementById("modifierBtn");
-
-  if (modifierBtn) {
-    modifierBtn.addEventListener("click", function (event) {
-      event.preventDefault(); // Empêche le comportement par défaut du bouton
-
-    
-     // Récupérer les valeurs des champs du formulaire
-      const nom = document.querySelector(`.nomModifier`).value;
-      const prenom = document.querySelector(`.prenomModifier`).value;
-      const email = document.querySelector(`.nouvelEmail`).value;
-
-      // Appeler une fonction pour traiter les données du formulaire
-      traiterFormulaire(codeAdherent, nom, prenom, email);
-    });
-  } else {
-    console.error("Bouton 'Enregistrer' non trouvé dans le DOM.");
-  }
-});
-
-// Fonction pour traiter les données du formulaire
-function traiterFormulaire(codeAdherent, nom, prenom, email) {
-  // Effectuer le traitement des données (par exemple, mettre à jour la base de données)
-  console.log(`Code Adhérent: ${codeAdherent}`);
-  console.log(`Nouveau Nom: ${nom}`);
-  console.log(`Nouveau Prénom: ${prenom}`);
-  console.log(`Nouvel Email: ${email}`);
-
-  // Vous pouvez insérer ici votre logique pour mettre à jour la base de données ou autre traitement nécessaire
-}
-*/

@@ -97,25 +97,32 @@
           <label for="email">Email :</label>
           <input type="email" id="email" name="email" required /><br /><br />
 
-          
           <button id="bValider" type="submit">Ajouter</button>
-          <button id="modifierBtn-${codeAdherent}" type="submit"class="hidden">Enregistrer</button>
-          <button id="supprimerBtn-${codeAdherent}" type="submit"class="hidden">Supprimer</button>
+          <button id="modifierBtn-${codeAdherent}" type="submit" class="hidden">
+            Enregistrer
+          </button>
+          <button
+            id="supprimerBtn-${codeAdherent}"
+            type="submit"
+            class="hidden"
+          >
+            Supprimer
+          </button>
           <button id="bAnnuler" href="">Annuler</button>
         </form>
         <p id="messageAjout" style="text-align: center"></p>
         <p id="messageModification" style="text-align: center"></p>
         <p id="messageSuppression" style="text-align: center"></p>
-        <div id="messageErreur" style="color: red;"></div>
+        <div id="messageErreur" style="color: red; text-align: center"></div>
         <div id="errorMessageContainer" style="text-align: center"></div>
       </aside>
     </main>
 
-   <!-- <h1>Ajout adhérents</h1> -->
+    <!-- <h1>Ajout adhérents</h1> -->
 
     <p id="messageAjout"></p>
 
-    <h2 class="aj">Adhérents ajoutés:</h2>
+    <h2 class="aj">Adhérents :</h2>
 
     <div id="tableContainer" class="hide">
       <table id="listePers" class="table table-bordered border-black">
@@ -131,82 +138,11 @@
         <tbody class="table-group-divider" id="tableId"></tbody>
       </table>
     </div>
-    <!--
-    <h2>Détails des adhérents :</h2>
-    <div id="detailsAdherents"></div>
 
-    <h2>Modifier l'email d'un adhérent :</h2>
-    <form id="modifierAdherentForm">
-      <label for="nomModifier">Nom :</label>
-      <input
-        type="text"
-        id="nomModifier"
-        name="nomModifier"
-        required
-      /><br /><br />
-
-      <label for="prenomModifier">Prénom :</label>
-      <input
-        type="text"
-        id="prenomModifier"
-        name="prenomModifier"
-        required
-      /><br /><br />
-
-      <label for="nouvelEmail">Nouvel Email :</label>
-      <input
-        type="email"
-        id="nouvelEmail"
-        name="nouvelEmail"
-        required
-      /><br /><br />
-
-      <button type="submit">Modifier Email Adhérent</button>
-    </form>
-
-    <p id="messageModification"></p>
-
-    <h2>Supprimer un adhérent :</h2>
-    <form id="supprimerAdherentForm">
-      <label for="nomSupprimer">Nom :</label>
-      <input
-        type="text"
-        id="nomSupprimer"
-        name="nomSupprimer"
-        required
-      /><br /><br />
-
-      <label for="prenomSupprimer">Prénom :</label>
-      <input
-        type="text"
-        id="prenomSupprimer"
-        name="prenomSupprimer"
-        required
-      /><br /><br />
-
-      <label for="emailSupprimer">Email :</label>
-      <input
-        type="email"
-        id="emailSupprimer"
-        name="emailSupprimer"
-        required
-      /><br /><br />
-
-      <button type="submit">Supprimer Adhérent</button>
-    </form>
-
-    <p id="messageSuppression"></p>
-
-    <p id="messageSuppression"></p>
-     <script src="js/adherents.js"></script>-->
-
-  <!--    <script type="module" src="js/map.js"></script>
-   <script type="module" src="js/liste-adherents.js"></script> -->
- 
-  <script src="js/liste-adherents.js"></script>
- <script src="js/modifier.js"></script> 
- <script src="js/supprimer.js"></script> 
-   <!--   <script>
+    <script src="js/liste-adherents.js"></script>
+    <script src="js/modifier.js"></script>
+    <script src="js/supprimer.js"></script>
+    <!--   <script>
      /*   this.adherents = new Map([
         [
           "001",
