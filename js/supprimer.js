@@ -10,6 +10,16 @@ document.addEventListener("click", function (event) {
   }
 });
 
+function masquerFormulaire(containerId) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    setTimeout(() => {
+      container.innerHTML = '';
+    }, 4000);
+  } else {
+    console.error("Container du formulaire non trouvé dans le DOM.");
+  }
+}
 // Fonction pour supprimer la ligne d'un adhérent dans le tableau
 function supprimerLigneAdherent(codeAdherent) {
   // Sélectionne l'élément du bouton Supprimer en utilisant l'attribut data-code
@@ -49,6 +59,17 @@ function clearMessage(element) {
 function supprimerAdherent(codeAdherent) {
   const adherent = adherents.get(codeAdherent);
 
+  const deleteFormContainer = document.getElementById("deleteFormContainer");
+  if (deleteFormContainer) {
+    const form = document.createElement("form");
+    form.id = `deleteForm-${codeAdherent}`;
+    form.className = "deleteFormClass";
+    form.innerHTML = `
+      <p>Voulez-vous vraiment supprimer l'adhérent ${adherent.nom} ${adherent.prenom} ?</p>
+      <button id="confirmDeleteBtn-${codeAdherent}" class="delete">Confirmer</button>
+      <button id="cancelDeleteBtn-${codeAdherent}" class="cancel">Annuler</button>
+    `;}
+    
   if (!adherent) {
     const messageErreur = document.getElementById("messageErreur");
     messageErreur.textContent =

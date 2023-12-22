@@ -243,7 +243,7 @@ function editerAdherent(codeAdherent) {
       }
 
       // Mettre à jour la ligne correspondante dans le tableau
-      mettreAJourLigneAdherent(codeAdherent, prenom, email);
+      mettreAJourLigneAdherent(codeAdherent,nom, prenom, email);
 
       // Sauvegarder les données mises à jour dans le localStorage
       sauvegarderAdherentDansLocalStorage(codeAdherent, nom, prenom, email);
