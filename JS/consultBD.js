@@ -75,7 +75,7 @@
 				newImg.setAttribute("alt",nameBDAlt +".jpg");
 				
 				newImg.setAttribute("id", "album-"+idAlbum);
-				newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded full");
+				newImg.setAttribute("class","shadow-sm p-1 mb-3 bg-white rounded full img-fluid");
 				
 				newDivCol.appendChild(newImg);
 				miniBD.appendChild(newDivCol);
