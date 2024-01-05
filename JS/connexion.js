@@ -5,14 +5,14 @@ if (connecte) {
 
 //------ alimentation ou récupération des données employés depuis le localStorage
 
-let recupMapEmplJson = localStorage.getItem('employes');
+let recupMapEmpl = localStorage.getItem('employes');
 
-if (recupMapEmplJson !== null) {
-    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+if (recupMapEmpl !== null) {
+    employesStorage = new Map(JSON.parse(recupMapEmpl));
 } else {
     localStorage.setItem("employes", JSON.stringify(Array.from(employes.entries())));
-    recupMapEmplJson = localStorage.getItem('employes');
-    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+    recupMapEmpl = localStorage.getItem('employes');
+    employesStorage = new Map(JSON.parse(recupMapEmpl));
 }
 
 var btnConnexion = document.getElementById("connexionBtn");

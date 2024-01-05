@@ -1,11 +1,11 @@
-let recupMapEmplJson = localStorage.getItem('employes');
+let recupMapEmp = localStorage.getItem('employes');
 
-if (recupMapEmplJson !== null) {
-    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+if (recupMapEmp !== null) {
+    employesStorage = new Map(JSON.parse(recupMapEmp));
 } else {
     localStorage.setItem("employes", JSON.stringify(Array.from(employes.entries())));
-    recupMapEmplJson = localStorage.getItem('employes');
-    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+    recupMapEmp = localStorage.getItem('employes');
+    employesStorage = new Map(JSON.parse(recupMapEmp));
 }
 
 var menuDynamicDiv = document.getElementById("menuDynamique");
