@@ -3,6 +3,18 @@ if (connecte) {
     document.location.href = "index.html";
 }
 
+//------ alimentation ou récupération des données employés depuis le localStorage
+
+let recupMapEmplJson = localStorage.getItem('employes');
+
+if (recupMapEmplJson !== null) {
+    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+} else {
+    localStorage.setItem("employes", JSON.stringify(Array.from(employes.entries())));
+    recupMapEmplJson = localStorage.getItem('employes');
+    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+}
+
 var btnConnexion = document.getElementById("connexionBtn");
 var msgErrConnexion = document.getElementById("msgErrConnexion");
 var formConnexion = document.getElementById("connexionform");
@@ -83,7 +95,7 @@ function existeAdherent(logAdherent, passAdherent) {
 function existeEmploye(logEmploye, passEmploye) {
     let userTrouve = false;
     
-    employes.forEach((values, id) => {
+    employesStorage.forEach((values, id) => {
         let loginRecupEmpl = values.login;
         let passRecupEmpl = values.pass;
         let typeUser = "employe";
