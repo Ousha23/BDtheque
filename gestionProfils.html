@@ -48,7 +48,7 @@
         <div class="d-flex flex-column flex-sm-row m-auto h-75" id="divEnsemble">
             
             <aside class="col-12 col-sm-3 order-first m-3 d-sm-flex flex-sm-column justify-content-center">
-                <div class="d-sm-flex flex-sm-column justify-content-center h-100 text-center" id="asideLiens">
+                <div class="d-sm-flex flex-sm-column h-100" id="asideLiens">
                     <div class="row ">
                         <a id="lienAjoutEmp" class="my-3 col-12">Ajouter un employé</a>
                         <a id="lienListeEmp" class="my-3 col-12">Afficher la liste des employés</a>
@@ -56,10 +56,10 @@
                 </div>
                 
             </aside>
-            <section class="col-12 col-sm-8 m-3 justify-content-center mx-auto hide" id="sectionFormAjoutEmp">
+            <section class="col col-sm-8 m-3 justify-content-center mx-auto hide" id="sectionFormAjoutEmp">
                 <p class="h1 text-center">Ajout d'un nouvel employé</p>
                 <div>
-                    <p id="msgErrGestionEmp"></p>
+                    <p class="msgErrGestionEmp"></p>
                 </div>
                 <form class="m-4 p-3" id="formAjoutEmp">
                     <div class="row m-1">
@@ -107,25 +107,25 @@
                     </div>
                 </form>
             </section>
-            <section id="listeEmp" class="col-12 m-3 justify-content-center">
+            <section id="listeEmp" class="col m-3 justify-content-center">
                 <p class="h1 text-center">Liste des employés</p>
                 <div>
-                    <p id="msgErrGestionEmp"></p>
+                    <p class="msgErrGestionEmp"></p>
                 </div>
                 <div id="divListeEmp" class="table-responsive overflow-x-auto">
                     <table id="tListeEmp" class="table table-bordered col-10">
                         <thead class="thead">
                             <tr>
-                                <th scope="col" class="col-1 col-sm-1 col-md-1">ID</th>
-                                <th scope="col" class="col-1 col-sm-1 col-md-1">Nom</th>
-                                <th scope="col" class="col-1 col-sm-1 col-md-1">Login</th>
-                                <th scope="col" class="col-1 col-sm-1 col-md-1">Email</th>
-                                <th scope="col" class="col-1 col-sm-1 col-md-1">Role</th>
-                                <th scope="col" class="col-1 col-sm-1 col-md-1">Actions</th>
+                                <th scope="col" class="d-none d-md-table-cell col-md-2">ID</th>
+                                <th scope="col" class="d-none d-md-table-cell col-md-2">Nom</th>
+                                <th scope="col" class="col-1 col-sm-1 col-md-2">Login</th>
+                                <th scope="col" class="d-none d-lg-table-cell col-md-2">Email</th>
+                                <th scope="col" class="col-1 col-sm-1 col-md-2">Role</th>
+                                <th scope="col" class="col-1 col-sm-1 col-md-2">Actions</th>
                             </tr>
                             
                         </thead>
-                        <tbody>
+                        <tbody class="tbody">
 
                         </tbody>
                     </table>

@@ -21,7 +21,7 @@ var inputLoginEmp = document.getElementById("loginEmploye");
 var inputPwdEmp = document.getElementById("passEmploye");
 var inputConfPwdEmp = document.getElementById("confirmPassEmploye");
 var btnAjoutEmp = document.getElementById("btnAjoutEmp");
-var msgErrGestionEmp = document.getElementById("msgErrGestionEmp");
+var msgErrGestionEmp = document.querySelector(".msgErrGestionEmp");
 var formAjoutEmp = document.getElementById("formAjoutEmp");
 var lienAjoutEmp = document.getElementById("lienAjoutEmp");
 var lienListeEmp = document.getElementById("lienListeEmp");
@@ -35,6 +35,8 @@ inputLoginEmp.addEventListener("blur", function() {verifLogin(inputLoginEmp.valu
 formAjoutEmp.addEventListener("submit", function(event) {verifForm(event)});
 lienAjoutEmp.addEventListener("click", function() {afficheSection("sectionFormAjoutEmp")});
 lienListeEmp.addEventListener("click", function() {afficheSection("listeEmp")});
+lienAjoutEmp.addEventListener("click", function() {changeColor(lienAjoutEmp, lienListeEmp)});
+lienListeEmp.addEventListener("click", function() {changeColor(lienListeEmp, lienAjoutEmp)});
 
 inputConfPwdEmp.addEventListener("blur", verifConfPwd);
 
@@ -47,7 +49,7 @@ inputConfPwdEmp.addEventListener("blur", verifConfPwd);
  * @param {event} event 
  */
 function verifForm (event) {
-    if (verifValeur(inputNomEmp.value) === false || verifValeur(inputPrenomEmp.value) === false || verifMail(inputMailEmp.value) === false || verifLogin(inputLoginEmp.value) === false) {
+    if (verifValeur(inputNomEmp.value) === false || verifValeur(inputPrenomEmp.value) === false || verifMail(inputMailEmp.value) === false || verifLogin(inputLoginEmp.value) === false || verifConfPwd(inputConfPwdEmp.value) === false) {
         event.preventDefault();
         msgErrGestionEmp.innerText = "Merci de remplir tout les champs du formulaire!";
     } else if (verifDoublon (inputLoginEmp.value,inputMailEmp.value) === true){
@@ -256,8 +258,9 @@ function construireTableEmp(){
 		var cellID = document.createElement("td");
 		var cellTextID = document.createTextNode(key);
 		cellID.appendChild(cellTextID);
+        cellID.classList.add("d-none", "d-md-table-cell", "col-md-1");
 		row.appendChild(cellID);
-		
+		// Nom de l'employé
         var cellnom = document.createElement("td");
 		var cellTextnom = document.createTextNode(employe.nom);
 		cellnom.appendChild(cellTextnom);
@@ -269,27 +272,32 @@ function construireTableEmp(){
 		cellLogin.appendChild(cellTextLogin);
 		row.appendChild(cellLogin);
 		
-
+        // Email de l'employé
         var cellEmail = document.createElement("td");
 		var cellTextEmail = document.createTextNode(employe.email);
 		cellEmail.appendChild(cellTextEmail);
+        cellEmail.classList.add("d-none", "d-lg-table-cell", "col-md-1");
 		row.appendChild(cellEmail);
-
+        // Role de l'employé
         var cellRole = document.createElement("td");
 		var cellTextRole = document.createTextNode(employe.role);
 		cellRole.appendChild(cellTextRole);
+        cellRole.classList.add("d-none", "d-md-table-cell", "col-md-1");
 		row.appendChild(cellRole);
         
+        
         var cellAction = document.createElement("td");
-        var btnModifierEmp = document.createElement("button");
-        var btnSupprimerEmp = document.createElement("button");
-        var btnModifierEmpText = document.createTextNode("Modifier");
-        var btnSupprimerEmpText = document.createTextNode("Supprimer");
+        var btnModifierEmp = document.createElement("span");
+        var btnSupprimerEmp = document.createElement("span");
+        var btnModifierEmpText = document.createTextNode("edit_square");
+        var btnSupprimerEmpText = document.createTextNode("delete");
         cellAction.classList.add("tdActionEmp");
         btnModifierEmp.appendChild(btnModifierEmpText);
         btnSupprimerEmp.appendChild(btnSupprimerEmpText);
         btnModifierEmp.setAttribute("id","btnModifierEmp");
+        btnModifierEmp.classList.add("material-symbols-outlined")
         btnSupprimerEmp.setAttribute("id","btnSupprimerEmp");
+        btnSupprimerEmp.classList.add("material-symbols-outlined")
         btnModifierEmp.addEventListener("click", function() {modifierEmp(key)});
         btnSupprimerEmp.addEventListener("click", function() {supprimerEmp(key)});
         cellAction.appendChild(btnModifierEmp);
@@ -333,4 +341,10 @@ function supprimerEmp (id) {
             }
         });
     }
+}
+
+function changeColor(lienActif, lienQuitte) {
+    console.log("test coulour")
+    lienActif.style.color = "#ff6944";
+    lienQuitte.style.color= "black"
 }
