@@ -1,3 +1,12 @@
+let recupMapEmplJson = localStorage.getItem('employes');
+
+if (recupMapEmplJson !== null) {
+    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+} else {
+    localStorage.setItem("employes", JSON.stringify(Array.from(employes.entries())));
+    recupMapEmplJson = localStorage.getItem('employes');
+    employesStorage = new Map(JSON.parse(recupMapEmplJson));
+}
 
 var menuDynamicDiv = document.getElementById("menuDynamique");
 var monComptetxt = document.getElementById("connexionLink");
@@ -32,7 +41,7 @@ function afficherMenu (idUser, typeUser){
         menuDynamicDiv.removeChild(menuDynamicDiv.firstChild);
     }
     if (typeUser==="employe"){
-        var employe = employes.get(idUser);
+        var employe = employesStorage.get(idUser);
         if (employe.role === "gestionnaire") {
             creerNavGestionnaire();
         } else if (employe.role === "responsable") {
