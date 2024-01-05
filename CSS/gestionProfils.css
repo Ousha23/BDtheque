@@ -6,7 +6,7 @@
 
 #lienAjoutEmp, #lienListeEmp {
     text-decoration:solid;
-    font-size: 18px;
+    font-size: 1.2em;
     color: black;
 }  
 
@@ -58,8 +58,8 @@ main {
 
 td:not(.tdActionEmp), #row {
     border: 1px solid #A9A9A9;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #row:hover {
@@ -73,7 +73,7 @@ td:not(.tdActionEmp), #row {
 }
 
 
-@media screen and (min-width: 350px) and (max-width: 830px){ 
+@media screen and (min-width: 350px) and (max-width: 578px){ 
     #asideLiens {
         border-right:none;
         margin-top: 0;
