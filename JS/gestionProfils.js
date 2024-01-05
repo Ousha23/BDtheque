@@ -21,10 +21,13 @@ var inputLoginEmp = document.getElementById("loginEmploye");
 var inputPwdEmp = document.getElementById("passEmploye");
 var inputConfPwdEmp = document.getElementById("confirmPassEmploye");
 var btnAjoutEmp = document.getElementById("btnAjoutEmp");
-var msgErrGestionEmp = document.querySelector(".msgErrGestionEmp");
+var msgErrAjoutEmp = document.getElementById("msgErrAjoutEmp");
+var msgErrModifEmp = document.getElementById("msgErrModifEmp");
 var formAjoutEmp = document.getElementById("formAjoutEmp");
 var lienAjoutEmp = document.getElementById("lienAjoutEmp");
 var lienListeEmp = document.getElementById("lienListeEmp");
+var btnAnnulModif = document.getElementById("btnAnnulModif");
+
 
 construireTableEmp();
 
@@ -32,14 +35,13 @@ inputNomEmp.addEventListener("blur", function () {verifValeur(inputNomEmp.value)
 inputPrenomEmp.addEventListener("blur", function() {verifValeur(inputPrenomEmp.value)});
 inputMailEmp.addEventListener("blur", function() { verifMail(inputMailEmp.value)});
 inputLoginEmp.addEventListener("blur", function() {verifLogin(inputLoginEmp.value)});
-formAjoutEmp.addEventListener("submit", function(event) {verifForm(event)});
+formAjoutEmp.addEventListener("submit", function(event) {verifFormAjout(event)});
 lienAjoutEmp.addEventListener("click", function() {afficheSection("sectionFormAjoutEmp")});
 lienListeEmp.addEventListener("click", function() {afficheSection("listeEmp")});
 lienAjoutEmp.addEventListener("click", function() {changeColor(lienAjoutEmp, lienListeEmp)});
 lienListeEmp.addEventListener("click", function() {changeColor(lienListeEmp, lienAjoutEmp)});
-
-inputConfPwdEmp.addEventListener("blur", verifConfPwd);
-
+inputConfPwdEmp.addEventListener("blur", function() {verifConfPwd(inputPwdEmp.value, inputConfPwdEmp.value )});
+btnAnnulModif.addEventListener("click",function() {afficheSection("listeEmp")});
 
 //////////// Fonctions//////////////
 
@@ -48,10 +50,10 @@ inputConfPwdEmp.addEventListener("blur", verifConfPwd);
  * Verifie les champs du formulaires avant ajout à la map et au localStorage
  * @param {event} event 
  */
-function verifForm (event) {
-    if (verifValeur(inputNomEmp.value) === false || verifValeur(inputPrenomEmp.value) === false || verifMail(inputMailEmp.value) === false || verifLogin(inputLoginEmp.value) === false || verifConfPwd(inputConfPwdEmp.value) === false) {
+function verifFormAjout (event) {
+    if (verifValeur(inputNomEmp.value) === false || verifValeur(inputPrenomEmp.value) === false || verifMail(inputMailEmp.value) === false || verifLogin(inputLoginEmp.value) === false || verifConfPwd(inputPwdEmp.value, inputConfPwdEmp.value) === false) {
         event.preventDefault();
-        msgErrGestionEmp.innerText = "Merci de remplir tout les champs du formulaire!";
+        msgErr("Un des champs est invalide. Merci de remplir tout les champs du formulaire!") ;
     } else if (verifDoublon (inputLoginEmp.value,inputMailEmp.value) === true){
         event.preventDefault();
         Swal.fire({
@@ -65,10 +67,10 @@ function verifForm (event) {
         });
 
     } else {
-        let roleSelect = verifRadio();
+        let roleSelect = verifRadio("role");
         if (roleSelect === null) {
             event.preventDefault();
-            msgErrGestionEmp.innerText = "Merci de selectionner un role pour cet employé";
+            msgErr("Merci de selectionner un role pour cet employé") ;
         } else {
             event.preventDefault();
             Swal.fire({
@@ -95,7 +97,7 @@ function verifForm (event) {
  * Vide la div msg
  */
 function viderMsgErr () {
-    msgErrGestionEmp.innerText = "";
+    msgErr("");
 }
 
 /**
@@ -107,7 +109,7 @@ function verifValeur(input){
     viderMsgErr();
     var myRegex = /^[a-zA-Z]+-?[a-zA-Z]*$/;
     if (input.length < 3 || myRegex.test(input) === false) {
-        msgErrGestionEmp.innerText = "le champs doit contenir au moins 3 lettres alphabétique";
+        msgErr("le champs doit contenir au moins 3 lettres alphabétique") ;
         return false;
     }
 }
@@ -120,7 +122,7 @@ function verifMail (mail){
     viderMsgErr();
     var myRegex =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (myRegex.test(mail) === false) {
-        msgErrGestionEmp.innerText = "Merci de saisir une adresse mail valide";
+        msgErr("Merci de saisir une adresse mail valide") ;
         return false;
     } 
 }
@@ -129,10 +131,10 @@ function verifMail (mail){
  * Contrôle la conformité avec le mot de passe saisi
  * @returns booleen
  */
-function verifConfPwd() {
+function verifConfPwd(passValue, confimPassValue) {
     viderMsgErr();
-    if (inputConfPwdEmp.value !== inputPwdEmp.value){
-        msgErrGestionEmp.innerText = "Le mot de passe ne correspond pas. Merci de le ressaisir!";
+    if (confimPassValue !== passValue){
+        msgErr("Le mot de passe ne correspond pas. Merci de le ressaisir!") ;
         return false
     }
 }
@@ -145,7 +147,7 @@ function verifLogin(input) {
     viderMsgErr();
 
     if ( !input ||input === null || input.length < 3) {
-        msgErrGestionEmp.innerText = "le champs doit contenir au moins 3 caractères";
+        msgErr("le champs doit contenir au moins 3 caractères") ;
         return false
     }
     return true
@@ -176,8 +178,8 @@ function verifDoublon (login, mail){
  * récupère les ID des inputs radio et vérifie celle qui est cochée
  * @returns booleen
  */
-function verifRadio() {
-    var radios = document.getElementsByName('role');
+function verifRadio(chaine) {
+    var radios = document.getElementsByName(chaine);
     var idCheck = null;
         for (var i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
@@ -199,9 +201,9 @@ function verifRadio() {
  * @returns 
  */
 function convertRole(role) {
-    if (role === "roleGestionnaire") {
+    if (role === "roleGestionnaire" || role === "roleModifGestionnaire") {
         return "gestionnaire";
-    } else if (role === "roleAdmin") {
+    } else if (role === "roleAdmin" || role === "roleModifAdmin") {
         return "admin";
     } else {
         return "responsable";
@@ -232,16 +234,24 @@ function ajouterEmploye(nom, prenom, login, mail, pass, role) {
  * @param {string} id 
  */
 function afficheSection(id) {
-    console.log("test")
+    viderMsgErr();
     var sectionFormAjoutEmp = document.getElementById("sectionFormAjoutEmp");
     var sectionListeEmp = document.getElementById("listeEmp");
+    var sectionModifEmp = document.getElementById("sectionFormModifEmp");
     if (id === "sectionFormAjoutEmp") {
         sectionFormAjoutEmp.classList.remove("hide");
         sectionListeEmp.classList.add("hide");
+        sectionModifEmp.classList.add("hide");
     } else if (id === "listeEmp") {
         sectionFormAjoutEmp.classList.add("hide");
         sectionListeEmp.classList.remove("hide");
+        sectionModifEmp.classList.add("hide");
+    } else if (id === "sectionFormModifEmp") {
+        sectionModifEmp.classList.remove("hide");
+        sectionFormAjoutEmp.classList.add("hide");
+        sectionListeEmp.classList.add("hide");
     }
+
 }
 
 /**
@@ -298,7 +308,8 @@ function construireTableEmp(){
         btnModifierEmp.classList.add("material-symbols-outlined")
         btnSupprimerEmp.setAttribute("id","btnSupprimerEmp");
         btnSupprimerEmp.classList.add("material-symbols-outlined")
-        btnModifierEmp.addEventListener("click", function() {modifierEmp(key)});
+        btnModifierEmp.addEventListener("click", function() {recupEmp(key)});
+        btnModifierEmp.addEventListener("click", function(){afficheSection("sectionFormModifEmp")});
         btnSupprimerEmp.addEventListener("click", function() {supprimerEmp(key)});
         cellAction.appendChild(btnModifierEmp);
         cellAction.appendChild(btnSupprimerEmp);
@@ -306,7 +317,75 @@ function construireTableEmp(){
 		tListeEmp.appendChild(row);
     });
 }
+//-----------------MODIFIER UN EMPLOYE
 
+function recupEmp(id) {
+
+    var emplAModif = employesStorage.get(id);
+    var nomModif = document.getElementById("nomModifEmp");
+    var prenomModif = document.getElementById("prenomModifEmp");
+    var passModif = document.getElementById("passModifEmp");
+    var confirmPassModif = document.getElementById("confirmPassModifEmp");
+    var loginModif = document.getElementById("loginModifEmp");
+    var mailModif = document.getElementById("mailModifEmp");
+    var roleModif = document.getElementsByName("roleM");
+    var formModifEmp = document.getElementById("formModifEmp");
+
+    nomModif.value = emplAModif.nom;
+    prenomModif.value = emplAModif.prenom;
+    passModif.value = emplAModif.pass;
+    loginModif.value = emplAModif.login;
+    mailModif.value = emplAModif.email;
+    confirmPassModif.value = emplAModif.pass;
+
+    if (emplAModif.role === "responsable") {
+        roleModif[1].checked = true;
+    } else if (emplAModif.role === "admin") {
+        roleModif[2].checked = true;
+    } else {
+        roleModif[0].checked = true;
+    }
+
+// todo Verif champs formulaire
+    nomModif.addEventListener("blur", function() {verifValeur(nomModif.value)});
+    prenomModif.addEventListener("blur", function() {verifValeur(prenomModif.value)});
+    confirmPassModif.addEventListener("blur", function() {verifConfPwd(passModif.value,confirmPassModif.value)});
+    formModifEmp.addEventListener("submit", function(event) {verifFormModif(event,nomModif.value,prenomModif.value, passModif.value,confirmPassModif.value, loginModif.value, mailModif.value, id, formModifEmp )});
+}
+
+function verifFormModif(event, nom, prenom, pass, confPass, login, mail, id, form) {
+    console.log("toto")
+    if (verifValeur(nom) === false || verifValeur(prenom) === false || verifConfPwd(pass, confPass) === false) {
+        event.preventDefault();
+        msgErr("Un ou plusieurs champs sont invalides. Merci de remplir tout les champs du formulaire!") ;
+    } else {
+        let roleSelect = verifRadio("roleM");
+        console.log(roleSelect);
+        if (roleSelect === null) {
+            event.preventDefault();
+            msgErr("Merci de selectionner un role pour cet employé") ;
+        } else {
+            event.preventDefault();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                iconColor: '#FF6944',
+                title: "L'employé : " + nom + ' a été modifié avec succès.',
+                confirmButtonColor: '#FF6944',
+                customClass: {
+                    popup: 'custom-alert-class',
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirection ou autre action ici
+                    form.submit();
+                    employesStorage.set(id, { nom, prenom, login, email: mail, pass, role: roleSelect });
+                    localStorage.setItem("employes", JSON.stringify(Array.from(employesStorage.entries())));
+                }
+            });
+        }
+    }
+}
 /**
  * Récupère l'employé par l'id, le supprime et actualise le tableau 
  * @param {string} id 
@@ -344,7 +423,11 @@ function supprimerEmp (id) {
 }
 
 function changeColor(lienActif, lienQuitte) {
-    console.log("test coulour")
     lienActif.style.color = "#ff6944";
     lienQuitte.style.color= "black"
+}
+
+function msgErr (chaine) {
+    msgErrModifEmp.innerText = chaine;
+    msgErrAjoutEmp.innerText = chaine;
 }
