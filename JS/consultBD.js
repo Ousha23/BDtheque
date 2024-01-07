@@ -4,6 +4,16 @@
 	const SRC_ALBUM = "albums/"
 	const SRC_DEFAULT = SRC_IMG + "noComicsMini.jpeg";
 	const roleUser = localStorage.getItem("role");
+	
+	let recupMapExemplaires = localStorage.getItem('exemplaires');
+
+	if (recupMapExemplaires !== null) {
+		exemplairesStorage = new Map(JSON.parse(recupMapExemplaires));
+	} else {
+		localStorage.setItem("exemplaires", JSON.stringify(Array.from(exemplaires.entries())));
+		recupMapExemplaires = localStorage.getItem('exemplaires');
+		exemplairesStorage = new Map(JSON.parse(recupMapExemplaires));
+	}
 
 	var miniBD = document.getElementById("listeBD");
 	var barreRecherche = document.getElementById("formRecherche");
@@ -361,7 +371,7 @@
 	*/
 	function nbrExmplairesAlbum(idAlbum) {
 		let nombreExemplaires = 0;
-		exemplaires.forEach((exemplaire) => {
+		exemplairesStorage.forEach((exemplaire) => {
 			if (exemplaire.idAlbum === idAlbum && exemplaire.disponible) {
 				nombreExemplaires++;
 			}
