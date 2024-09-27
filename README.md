@@ -1,4 +1,5 @@
 # BDtheque
+![image](https://github.com/user-attachments/assets/0b23e66c-33f4-4a0b-8d56-d00f6a500c6f)
 
 Plateforme web de gestion de bibliothèque de bandes dessinées :
 
@@ -25,7 +26,6 @@ Plateforme web de gestion de bibliothèque de bandes dessinées :
 - Bootstrap
 - JavaScript
 
-![image](https://github.com/user-attachments/assets/8b338d66-1a54-4bad-93bc-1c149343e370) ![image](https://github.com/user-attachments/assets/edefe1a1-0090-41ec-a07f-6274083a2965) ![image](https://github.com/user-attachments/assets/d83b2100-b533-4647-aa4a-ed6554eb51be)
 
 
 
