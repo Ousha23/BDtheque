@@ -22,7 +22,7 @@ Plateforme web de gestion de bibliothèque de bandes dessinées :
 ## Stack technique
 
 - HTML/CSS
-- Media queries
+- CSS Media Queries
 - Bootstrap
 - JavaScript
 
