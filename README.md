@@ -28,7 +28,7 @@ Plateforme web de gestion d'une bibliothèque de bandes dessinées :
 
 
 <img src="https://github.com/user-attachments/assets/01ee8b68-caf0-49f1-82aa-4c07a0460c23" width="80px" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" alt="HTML5" width="80px" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg" alt="CSS3" width="80px" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" alt="JavaScript" width="80px" />
-  </td></tr></table>
+
 
 
 
